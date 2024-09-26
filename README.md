@@ -1,7 +1,6 @@
 # Pixel-Realm:Combat Heroes
 A Zelda-like game I made with Python inspired by this repo:  https://github.com/Spyder-0/Zelda-with-Python
 
-![image](https://user-images.githubusercontent.com/85440857/160607397-d085869c-3910-4091-b790-be096ee72b5a.png)
 
 ![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm/main/repo_assets/boss_fight.gif)  <!-- Your GIF here -->
 
