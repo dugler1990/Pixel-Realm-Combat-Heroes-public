@@ -1,0 +1,490 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "objects/healing_shrine_1.png",
+        "object_info": {
+            "width": 4,
+            "height": 4,
+            "x_pos": 16,
+            "y_pos": 21,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "iglu_2",
+        "image_path": "objects/iglu_2.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 23,
+            "y_pos": 16,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "house_hut_medium_finished",
+        "image_path": "objects/house_hut_medium_finished.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 30,
+            "y_pos": 14,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "house_hut_medium_finished",
+        "image_path": "objects/house_hut_medium_finished.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 30,
+            "y_pos": 16,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "house_square_hut_finished",
+        "image_path": "objects/house_square_hut_finished.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 30,
+            "y_pos": 17,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "teepee_1",
+        "image_path": "objects/teepee_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 31,
+            "y_pos": 16,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "teepee_1",
+        "image_path": "objects/teepee_1.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 33,
+            "y_pos": 16,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "build_home_stage_2",
+        "image_path": "objects/build_home_stage_2.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 33,
+            "y_pos": 20,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "house1_finished_small",
+        "image_path": "objects/house1_finished_small.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 30,
+            "y_pos": 19,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "ice_tile_blizzar_1",
+        "image_path": "objects/ice_tile_blizzar_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 32,
+            "y_pos": 13,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "healing_shrine_1",
+        "image_path": "objects/healing_shrine_1.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 6,
+            "y_pos": 13,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "iglu_1",
+        "image_path": "objects/iglu_1.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 5,
+            "y_pos": 16,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "ice_obstruction_1",
+        "image_path": "objects/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 3,
+            "y_pos": 13,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "ice_obstruction_1",
+        "image_path": "objects/ice_obstruction_1.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 4,
+            "y_pos": 13,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    {
+        "id": "ice_tile_blizzar_1",
+        "image_path": "objects/ice_tile_blizzar_1.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 12,
+            "y_pos": 13,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]
+        }
+    }
+]

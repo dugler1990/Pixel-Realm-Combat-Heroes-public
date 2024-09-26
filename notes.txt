@@ -1,0 +1,2570 @@
+﻿WL : 
+
+
+
+tasks : 
+
+ 1.Display timer  Done
+
+ 2. have spawner frequency increase with time ( if desired )
+ 
+ 	 1. give spawner a timer, 
+ 		check if spawners have attribute "time_scaled"
+ 			adjust frequency.
+ 			
+ 			
+ 	Its working, its fun but after a couple hundred sprites it get slow,
+ 	
+ 	some efficiency work ? 
+ 	
+ 	place a max too, ... there is a max, not to spawn number but to 
+ 	                     total max, thing is it spawns a bigger number
+ 	                     than that if its below sometimes, like im below
+ 	                     max of 200, 6 spanwers near with spawn number 300
+ 	                     , it shoots out 1800 sprites.
+ 	                     
+ checking the profile : 
+ 
+ it seems maybe the quadtree manager i made might not be great, the remove method takes
+ alot, check this further.
+ 			    
+  
+ 
+ 3. get hell scape terrain
+
+
+
+
+
+## Levels with tilemaps : 
+
+had issue with the large tile transitions, i have a set of tiny 
+
+
+task : figure out the actual work flow.
+
+	So i did one edge looking alright, its the same tile right to left edge,
+	I guess i now need to do the edge on the other side for it to be usable, 
+	we could then chain them togethor. I need to do many transitions tho, 
+	same tile back to back is boring. I need to think how big of a job this is.
+	
+	-> estimation of edges to do.
+	
+	If i just do every edge in this image, we can then re tile map large and 
+	i have these tiles with transitions, could be workable for now.
+	
+	Every transition would no exist though, atm i am working on 8 tiles in 
+	all orientations 32 tiles. but there is not each tile transition with each tile, 
+	i dont know if i need that, left do this edge work for now, i do beleive its
+	worth while.
+	
+	...... having doubts, its still going to be insane to fit these tile togethor
+	
+	i need layers really, like the ground, grass, plants, dirt
+	
+	
+	
+	#### We are adding spawners in jungle.
+	
+	
+	- got one, 
+	
+	- need to figure out why spawners to not keep spawning.
+	
+	- ok , it seems to be working but they spawn too frequently, no control of when they
+	spawn.
+	
+	
+	
+	##### New idea for spawners is that they should, generally, only spawn when you are
+	
+	      1.near by
+	      		1.0 spawn areas need position
+	      		1.1. define spawn range for spawners
+	      		1.2. check spawn range before spawning
+	      		     ---> I suppose we should pass the player from the level
+	      
+	      		DEBUG ISSUE: 
+	      		shows distance is always the same and huge.
+	      		
+	      		ok, so now , dt is always the time before the last run, 
+	      		its not accumulating.
+	      		
+	      		I need to keep track of the dt's if there is no spawn,
+	      		this should be done in the self. spawn areas.
+	      		
+	      		i need to 
+	      			1.create an attribute for this in create_spawn area
+	      			2.add dt to this when there is no spawn
+	      			3. check this in the if statement.
+	      		
+	      		### After some time , spawns stop. Why ? 
+	      
+	      
+	      		This is because we do not remove enemies when they die.
+	      
+	      		upon death i need to remove from the spawner, im not sure
+	      		if it will be able to find the correct one to remove. 
+	      		
+	      		
+	      		WL: for some reason processed enemies is always empty now
+	      		    we used to only do this for drops
+	      		    
+	      		    it is true that drops dont seem to happen now either.
+	      		
+	      		
+	      		
+	      
+	      		WL:
+	      		### Some issue with the neutrals interacting with tiles
+	      
+	      2. distinction between initial Nº of spawns and future
+	      3. they should spawn in relation to the number of enemies that
+	         spawner has spawned, not total enemies
+	      4. selectively have a max spawn
+	      
+	      WL:
+	      5. potentially be able to attack the spawner 
+	
+	
+	
+	# we are going to make the huts spawn tribey spears, they will be quick af
+	# plants will spit venom
+	
+	
+	
+	
+	
+	
+	
+	##### Ok , so its not that bad. 
+	
+	---------------------> lets implement this level, i need to actually create a new 
+	                        level.... but for now, ill just place it like the old one.
+	
+	
+	
+
+
+
+# Overhead area development : 
+
+a tthe moment, the layout manager is creating an overhead areas, 
+i have defined it as a matrix, one issue is that i am expanding the level massively, 
+its actually not defined in any clear way, i canjust place objects into 
+a never ending area. 
+
+i have some logic in the camera group to manage overhead areas, 
+i think it is assumed that it is like another "ground"
+
+lets look
+
+
+
+#### so overhead list is not being filled.
+
+review this.
+
+
+Somhow overhead areas are still not filled, we have seen that the canopy matrix is imported 
+and shows 1's, somehow its getting reset or something ? 
+
+
+
+
+
+
+
+
+
+
+Still not sure how to render and maintain/update enemies.
+
+
+
+
+So in the original level, there is a .csv to look at, its prty much harcoded similar to the player spawning.
+
+For the enemies, I will defo need to do some extra work. Now we have layout starts, enemies instantiated, i.e., they would be instantiated again with full health etc if I leave the area and come back.
+
+How do we want this to actually work ? 
+
+
+For the Player, we need to just keep his info as some global var, this way when we regenerate him, we keep him with the correct hp, etc
+
+
+
+
+For Enemies, we will want important enemies to keep their position and health, we can have everyone else respawn as normal ( solong as not dead ) we do want to be able to lear out rooms, some areas should have monsters spawning randomly at a certain rate
+
+
+
+
+
+
+
+ok, so I think im ready to create the necessary config files and give it a whirl.
+
+I need the layout .csv to be moved, object defiitions made.
+
+
+WL
+
+
+ok, I just need to define triggers, is this done ? 
+----→ JUST CHECK THE TRIGGERS CONFIGURATION 
+
+---- MAKE THE LEVEL 4 choice an option
+
+----- TEST.
+
+
+
+
+
+
+# I get error self is not defined in the new YsortCameraGroup
+
+but I havve not defined enemies.
+
+
+
+
+
+WL:
+
+
+Ok, so its all setup, I just need to make sure about the old functions that were in the level class, I am getting error 
+
+
+
+
+
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Main2.py", line 95, in <module>
+    game.run()
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Main2.py", line 84, in run
+    self.start_level(self.level_selection.selected_level)
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Main2.py", line 49, in start_level
+    self.level = Level4(self.input_manager, player_info_dir, level_4_layout_path)  # Initialize Level 3 with a new class or parameters
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Level4.py", line 248, in __init__
+    self.layout_manager.initialize_layout( initial_layout_dir ) # Convention: initial layout is defined by naming convention       
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Level4.py", line 75, in initialize_layout
+    self.create_attack,
+AttributeError: 'LayoutManager' object has no attribute 'create_attack'
+
+
+
+
+
+
+
+cool, now i need a slightly better colision method for tiles which are like half images of objects and half not, you know what i mean ? i have tiles which are 50% transparent but as is, the obstruction is shown to be the entire tile, maybe a specific function to check transparent pixels on such tiles and a definition of smaller obstruction tiles in this situation ? 
+
+
+
+WL : next is to allow 
+
+
+
+
+
+
+
+
+
+
+WL: 
+
+
+1. I need to make sure enemy and object output is aligned to run levels
+
+
+2. Get some tiles and objects etc
+
+
+3. define triggers and spawning points on map builder. This should actually be done through objects
+    --- I still need to define obstruction , and trigger.
+
+
+WL:
+I just went in too hard to change Level4. Level4 was working triggers, I just changed Map4 to Map5 In the code, ill copy and carry on testing, says im missing a file, its a .txt to specify the starting layout, EZ.
+
+Idea for first new char, low level he randomly selects from all possible attacks , crap , gimmick and epic , also attack rate, damage, area, etc.
+
+wolf saga, use wolf face as text .
+
+
+
+
+
+{"layouts":[ {"name":"ground",
+              "csv_layout_path":"../Map4/ice_test/ground/ground_csv.csv", 
+              "tiles":[ {"tile_image_path":"../Map4/ice_test/ground/ice_ground_1.png",
+                         "csv_constant_value":1} ]
+             }
+           ]
+}
+
+
+
+
+
+################## Just need to save the enemy data 
+
+ ---- >  Enemies folder within the layer folder contain enemies.json
+ ---- >  Enemy definitions are still in Settings and Graphics/Monsters.
+
+
+Git token:
+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
+new : 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
+new2: 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
+
+
+What would be the minimal version of this ? 
+
+we had one rect client server we lost it trying to get to, you can cntrlz even.
+
+
+
+some ideas and inspiration  
+
+ghost initially hard
+
+then you kill hundreds
+
+racoon changes size, starts small, then pushes you around
+
+rogue character is just at the side of the window and dissapears
+
+in initial character setup, you must choose key passivs, one is orientation
+regular char only gets mini map with FOW at level 10, this gives you it to start with
+with one slight help, as you level it up you get godmode map
+
+you can also get intuition, it will give you sparkles on the map to follow of different kinds
+
+Xp gain being Isra style ( when moving you upgrade movement bui.ding building spells , spells)
+
+somehow obstruction matrix of objects doesnt work... 
+
+
+wl: create some nice attacks etc for ice_mage
+
+	1. i want him to fire projectiles from a distance,
+	
+		Enemy projectile logic : 
+			- if he is not in cooldown, 
+			  if he has projectile
+			   -> fires projectile towards enemy
+			   	so it sjust in cooldown that he spazzes around, why he does not end up just touching Player i dont
+			   	understand
+			   	
+			   	Update has move if not frozen but then also animate
+			   	-> animate again has move, really dude is moving even if thats not his status.
+			   	-> I could have an indicator 'move deliberately'
+			   	The confusing thing here is that we are runnign 2 updates, the one i just described
+			   	and then "enemy_update" enemy update runs get_status(player) and actions.
+			   	
+			   	WL: checking comination of enemy updates 
+			   	
+			   	
+			   	------ So im going to keep the move in update and all other actions in actions...
+			   	
+			   		-> first goal - Get regular enemies running with these configs.
+			   		   -> Spawner
+			   		   -> config
+			   		   -> Enemy attributes ?	
+			   		   
+			   		   
+			   		   
+			   		   --- there is code to add 
+			   		   
+			   		   
+
+
+#### WL 
+
+1. i will have snake spawners going down the river, they are invisible.
+
+----- TRYBEY SNAKE DOES NOT HAVE SPECIAL ATTACK DEFINITION.
+
+	I need to create the monster_info entries.
+
+
+
+
+
+
+
+error from enemy
+    spawner.spawn_enemy({'type': enemy_type,
+  File "/home/fresh/Desktop/Zelda-with-Python/Code/Spawner.py", line 161, in spawn_enemy
+    enemy = Enemy(monster_name = config['type'], 
+TypeError: Enemy.__init__() got an unexpected keyword argument 'layout_callback_update_quad_tree'
+
+
+###
+it seems the quad tree is not being passed correctly to enemies 
+
+
+
+
+
+## Ok, so now the issue is that im not passing the quadtree to the create_particles function in all cases,
+   
+   
+   
+   
+   #### Ok, now i am trying to use particles for collisions it seems, in the regular collision sense, 
+        we dont really want that but an attribute that makes projectiles bounce off you is cool,
+        
+        so i can have an if in the collisions... its a bit wild, maybe a filter in the hit method?
+        
+        
+        
+        
+I have ground without offset then sprites with offset, i need a way to define the
+ide that there are objects which when the player goes into them, they obstruct him,
+this would actually be cool for objets to ( behind them at som eheight, 
+
+-> i will need another group for this , right ? it would be great to be able to draw this too. How could i do thi ? 
+
+
+
+So i was going to simply add a self.canopy_sprites to the layout_manager
+-> apply the logic of adding canopy sprites in the if 'scaled object layer'
+
+i was concerned about this then needing to be centralized but really its just 
+adding to this vector, i can add it for objects in future too.
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        PROBLEM IS SOMETHING LIKE : normally i remove by just updating but passing alive = False ?
+                                    Now ive got actual quad tree removes in the particles
+                                    if anything it should be quadtree.quadmanager.remove , right ? 
+                                    
+                                    
+                                    
+                                    
+                                    
+  ##### Ok, so we got something now, boss guy is moving around .
+  
+  -remove all quadtree prints 
+  
+  -print all entity information
+   
+   
+   
+   ok, so i need to either pass the fire_projectile to the combat strategy or 
+          i need to just use fire_projectile with the key in ranged attacks (iceball2)
+          
+          
+          
+          
+          
+          
+  #### Ok evasion and range attack works
+       -> mele errors, should be simple, i need animations though
+       
+       			it seems to be passing projectile type melee to the fire projectile.....
+       			# issue : how on earth is the moster setting daemon dog projectile working for iceball ? 
+       			          is it hardcoded in fire_projectile ? 
+       
+       
+       
+       			MY PLAN TO ADAPT ENEMIES FOR THIS DOUBLE CONFIGURATION ISSUE: 
+       			
+       			as is : 
+       			enemy update runs get_status, then runs actions
+       			this sets the enemy as move attack or idle. 
+       			this get status method is the only place where combat related attributes are used outside of the combat
+       			strategy.
+       			
+       			to be : 
+       			
+       			we will define a single combat_config that will be passed to the combat strategy
+       			the combat strategy will manage the entities status ( it still needs to be set to move because
+       			                                                      it mooves in the other update.... ) 
+       			                                                      
+       			it also controls idle ( just an animation issue ) 
+       			
+       			Im worried about the exp and health and speed, i guess taking damage and giving xp is not necessarily combat ? 
+       			hmm
+       			
+       			there definately are uses in the enemy class, im worried that everything is going into combat too...
+       			lets not do that, i expect i will segregate the combat info in the monster config.
+       			
+       			
+       			move is not considered combat, all entities do it, thats why we keep it separate, health and xp too.
+       			
+       			ok, NON COMBAT PARAMS : 
+       			
+       			exp 
+       			health
+       			speed # should be base speed
+       			resistance # should also be base resistance, also  ,this seems to define how much the entity changes direction
+       			damage ? again, base damage maybe....
+       			-----------> ok good, attack damage is not used in the enemy, 
+       			             but lets see the different ways to damage, its a bit out of control.
+       			             
+       			             ok, seems pretty controlled, projectiles do their own thing, 
+       			             melee checks distance here 
+       			             uses attack atribute, i think i can get rid of the damage.
+       			             
+       			             
+       			             
+       			             
+       			             
+       			             ok, i was trying to achieve some efficiency by passing the special attacks from the monster info
+       			             the idea is that they dont all need a bunch of callbacks, could get inefficient in terms of memory.
+       			             
+       			             idea would be to pass the callbacks systematically.
+       			             
+       			             the way to do this would not be with "SPECIAL ATTACKS"
+       			             it would be to pass a dictionary of level callbacks.
+       			             
+       			             
+       			             right now i know that projectiles are working without having SPECIAL ATTACKS configured
+       			             
+       			             i am just going to remove it  and proceed.
+       			             
+       			             1. remove special attacks from enemy config.... meh , i can use it later maybe ? 
+       			             
+       			             1. just create combat_config area of configuration, containing all but 
+       			                 health 
+       			                 xp
+       			                 speed
+       			                 resistance
+       			                 attack sound
+       			                 
+       			                 
+       			                 
+       			                 The enemy now has combat_config
+       			                 
+       			                 
+       			                 
+       			                 getting this error : 
+
+					
+					
+					
+					
+				1. Guy is still not moving towards in the melee range,
+				2. he also moved too erratically when evading.  					
+					
+				3. running into walls looks so silly.
+				   need to do a little path finding.
+				   
+				   
+				we have to understand why melee is doing no damage, also give the guy an animation
+				maybe we have to define guys that have cooler melees than just and animation and running all over you..
+				
+				
+				
+				1. rebounding projectiles dont damage currently
+				2. evasive movement is too eratic ( wasnt there already a solution for changing direction  
+				                                    maybe in neuts ) 
+				3. bit of path finding ? 	
+					
+					
+       			                 he is evading too far , once he gets certain distance he should be idle
+       			                 
+       			                 ( use generic notice radius, right ? )
+       		WL:	                 
+       			                 there shouldalso be a radius after which evasive movement is just in the radius he can fire at and a bit out
+       		
+       		
+       		
+       		
+       		### particles are not moved from the quadtree on death.
+       		
+       			## rebounded projectiles need to be placed in 
+       			   ...enemy attack sprites ? 
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   WL: going to implement partials for the trigger conditions to do special attacks.
+       			   
+       			   ->
+       			   
+       			   passing combat_context to combat strategy now, checking if it is prepped for it
+       			   
+       			   
+       			   
+       			   
+       			   WL
+       			   SO
+       			   
+       			   MEHOW THERE IS NO FIRE PROJECTILE IN THE COMBAT CONTEXT PASSED TO ICE MAGE
+       			   
+       			   
+       			   
+       			   icemage context is not being passed
+       			   
+       			   
+       			   
+       			   ok, so here is the issue : 
+       			   
+       			   the config passed to the enemy creation , particularly in initial init, 
+       			   at minimum, i ned to take from the generic dict the actual config. 
+       			   
+       			   
+       			   
+       			   
+       			   Just finishing up summon skill
+       			   
+       			   -> create spawn enemy callback and add to context
+       			   -> review the "update" logic, i dont see it called
+       			   
+       			   
+       			   WL:
+       			   just check on has_taken_damage attribute 
+       			   
+       			   
+       			   WL:
+       			   he seems to get stuck summoning and never finish..
+       			   
+       			   
+       			   stil doesnt execute ever.
+       			   
+       			   literally never in status "summoning"
+       			   
+       			   
+       			   status is changing imediately to attack
+       			   why?
+       			   
+       			   
+       			   
+       			   
+       			   Now he gets stuck summoning, i guess the update is not running 
+       			   ever.
+       			   
+       			   
+       			   
+       			   
+       			   seems to get stuck moving or attacking
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   ### Somehow the changes have made entities messup
+       			       particularly the wierd sitch where i 
+       			       am passing a function to update quadtree
+       			       
+       			       i guess the change of parameter positions
+       			       couldve done this.
+       			       
+       			       I think it might be regarding needing to pass
+       			       them the correct combat_context
+       			       i.e. update_quad_tree.
+       			   
+       			   ###
+       			   	Issues : Ready button is not closing it....
+       			   	         it was before..... ahhh 
+       			   	         i cant get rid of the points,
+       			   	         
+       			   	         points are being reset on every draw.
+       			   	         
+       			   	         
+       			   	from the main part, 
+       			   	we extract the resulting stats from the config.
+       			   	
+       			   	
+       			   	WL
+       			   	1.ADD vitaliy
+       			   	2.ADD beard for charisma
+       			   	
+       			   	3.understand why mana health attack are not changing
+       			   	
+       			   	
+       			   	
+       			   	config shows high mana but i think this is a
+       			   	value which is not connected to the energy actually.
+       			   	
+       			   	
+       			   	         
+       			   
+       			   1. Expand jungle area
+       			   2. add main building
+       			   3. add enemies
+       			   4. add spawner (from jungle stuff)
+       			   5. add other building.( from jungle stuff )
+       			   6. try new jungle floor
+       			   	-> for some reason putting image 2 in between image 1 and 3 does not work, when i increase y massivly i can atleast see them : 
+       			   	-> It works further down, it seems to be interacting with the
+       			   	   grass tiles or something.
+       			   
+       			   
+       			   -> make tree tops  not fully blocked, do trees, 
+       			      need logic for cover player/not
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   do cool fight dynamics you know
+       			   
+       			   **jab and move, 
+       			   heavy front kick,
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   check the melee parrys.
+       			   # -> just empty logic, i can do wtvr i want.
+       			   
+       			   more evasions and spells
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   get masks on projectiles.
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   we did masks on collisions, we created .masks just like .images and rotate them by animating
+       			   
+       			   ok, so there will be some complication due to the "left_right" logic in the enemy that the convert to mask
+       			   function is expecting, i believe we are rotating the images right ? we just need to rotate the masks in this
+       			   case too, have a look, should be a far simpler function.
+       			   
+       			   
+       			   
+       			   WL
+       			   
+       			   1.SpecialAttacks implementation
+       			   
+       			   2.
+       			   check the melee parry, what is supposed to happen ? oh, its not implemented, lets do that first. 
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       			   
+       		
+       			                 
+       			                 
+       			                 
+       			                 
+       			                 
+       			                 
+       			             
+       			             
+       			             
+       			             
+       			             
+       			             
+       			             
+       			
+       			
+       			
+       			
+       			
+       			
+       			
+       			
+       			
+       			
+       
+       
+       
+       -> check parrys , i need animations though
+       -> need to get masks for projectiles.
+       -> special attack 
+            -> teleport 
+            -> fire multiple projectiles
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+   
+   
+   
+   
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+			   		   
+
+trigger parry effect in get damage function code example from gpt:
+Got it! Let's refine the combat strategies and their movement methods to incorporate the different movement states (offensive, defensive, evasive) and ensure the decide_action function sets these appropriately. We'll also ensure the mixed strategy can handle multiple ranges and randomness.
+
+Refined Movement Strategy Implementation
+Key Enhancements
+Movement States: Incorporate movement states (offensive, defensive, evasive) and the logic for handling them.
+Mixed Strategy: Add logic for handling multiple ranges and random switching between melee and ranged attacks.
+Dynamic Movement Changes: Implement conditions to dynamically change movement strategies based on attributes like health and specific enemy attributes.
+Updated Code
+Combat Strategies
+python
+Copy code
+import random
+import pygame
+
+class CombatStrategy:
+    def __init__(self, parry_effects, movement_behavior):
+        self.parry_effects = parry_effects
+        self.movement_behavior = movement_behavior
+
+    def decide_action(self, enemy, player):
+        raise NotImplementedError
+
+    def execute_attack(self, enemy, player):
+        raise NotImplementedError
+
+    def move(self, enemy, player):
+        raise NotImplementedError
+
+    def parry(self, enemy, player):
+        raise NotImplementedError
+
+
+class MeleeCombatStrategy(CombatStrategy):
+    def __init__(self, melee_attacks, parry_effects, movement_behavior):
+        super().__init__(parry_effects, movement_behavior)
+        self.melee_attacks = melee_attacks
+
+    def decide_action(self, enemy, player):
+        distance, _ = enemy.get_player_distance_direction(player)
+        if distance <= enemy.melee_attack_radius and enemy.can_attack:
+            enemy.current_attack_type = "melee"
+            enemy.movement_state = 'offensive'
+        else:
+            enemy.current_attack_type = None
+            enemy.movement_state = 'offensive'
+
+    def execute_attack(self, enemy, player):
+        current_time = pygame.time.get_ticks()
+        if current_time - enemy.last_attack_action_time >= enemy.attack_action_cooldown:
+            enemy.last_attack_action_time = current_time
+            enemy.attack_time = current_time
+
+            if enemy.current_attack_type == "melee":
+                attack = random.choice(self.melee_attacks)
+                enemy.damage_player(attack['damage'], "melee")
+                enemy.attack_sound.play()
+                enemy.attack_cooldown = attack['cooldown']
+    
+    def move(self, enemy, player):
+        distance, direction = enemy.get_player_distance_direction(player)
+        if enemy.movement_state == 'offensive':
+            enemy.direction = direction
+        elif enemy.movement_state == 'defensive':
+            enemy.direction = -direction
+        elif enemy.movement_state == 'evasive':
+            enemy.direction = -direction + pygame.math.Vector2(random.uniform(-1, 1), random.uniform(-1, 1)).normalize()
+        
+        enemy.status = 'move'
+
+
+class RangedCombatStrategy(CombatStrategy):
+    def __init__(self, ranged_attacks, parry_effects, movement_behavior):
+        super().__init__(parry_effects, movement_behavior)
+        self.ranged_attacks = ranged_attacks
+
+    def decide_action(self, enemy, player):
+        distance, _ = enemy.get_player_distance_direction(player)
+        if distance <= enemy.ranged_attack_radius and enemy.can_attack:
+            enemy.current_attack_type = "ranged"
+            enemy.movement_state = 'defensive'
+        else:
+            enemy.current_attack_type = None
+            enemy.movement_state = 'defensive'
+
+    def execute_attack(self, enemy, player):
+        current_time = pygame.time.get_ticks()
+        if current_time - enemy.last_attack_action_time >= enemy.attack_action_cooldown:
+            enemy.last_attack_action_time = current_time
+            enemy.attack_time = current_time
+
+            if enemy.current_attack_type == "ranged":
+                attack = random.choice(self.ranged_attacks)
+                enemy.special_attacks[attack['type']](enemy, player)
+                enemy.attack_sound.play()
+                enemy.attack_cooldown = attack['cooldown']
+    
+    def move(self, enemy, player):
+        distance, direction = enemy.get_player_distance_direction(player)
+        if enemy.movement_state == 'defensive':
+            enemy.direction = -direction
+        elif enemy.movement_state == 'evasive':
+            enemy.direction = -direction + pygame.math.Vector2(random.uniform(-1, 1), random.uniform(-1, 1)).normalize()
+        
+        enemy.status = 'move'
+
+
+class MixedCombatStrategy(CombatStrategy):
+    def __init__(self, melee_attacks, ranged_attacks, parry_effects, movement_behavior):
+        super().__init__(parry_effects, movement_behavior)
+        self.melee_attacks = melee_attacks
+        self.ranged_attacks = ranged_attacks
+
+    def decide_action(self, enemy, player):
+        distance, _ = enemy.get_player_distance_direction(player)
+        if distance <= enemy.melee_attack_radius and enemy.can_attack:
+            enemy.current_attack_type = "melee"
+            enemy.movement_state = 'offensive'
+        elif distance <= enemy.ranged_attack_radius and enemy.can_attack:
+            enemy.current_attack_type = "ranged"
+            enemy.movement_state = 'defensive'
+        else:
+            enemy.current_attack_type = None
+            enemy.movement_state = 'evasive'
+
+    def execute_attack(self, enemy, player):
+        current_time = pygame.time.get_ticks()
+        if current_time - enemy.last_attack_action_time >= enemy.attack_action_cooldown:
+            enemy.last_attack_action_time = current_time
+            enemy.attack_time = current_time
+
+            if enemy.current_attack_type == "melee":
+                attack = random.choice(self.melee_attacks)
+                enemy.damage_player(attack['damage'], "melee")
+                enemy.attack_sound.play()
+                enemy.attack_cooldown = attack['cooldown']
+            elif enemy.current_attack_type == "ranged":
+                attack = random.choice(self.ranged_attacks)
+                enemy.special_attacks[attack['type']](enemy, player)
+                enemy.attack_sound.play()
+                enemy.attack_cooldown = attack['cooldown']
+    
+    def move(self, enemy, player):
+        distance, direction = enemy.get_player_distance_direction(player)
+        if enemy.movement_state == 'offensive':
+            enemy.direction = direction
+        elif enemy.movement_state == 'defensive':
+            enemy.direction = -direction
+        elif enemy.movement_state == 'evasive':
+            enemy.direction = -direction + pygame.math.Vector2(random.uniform(-1, 1), random.uniform(-1, 1)).normalize()
+        
+        enemy.status = 'move'
+Enemy Class
+python
+Copy code
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, monster_name, pos, groups, obstacle_sprites, damage_player, trigger_death_particles, add_exp, special_attacks=None, persistent=True, combat_config=None):
+        super().__init__(groups)
+        self.monster_name = monster_name
+        self.pos = pos
+        self.groups = groups
+        self.obstacle_sprites = obstacle_sprites
+        self.damage_player = damage_player
+        self.trigger_death_particles = trigger_death_particles
+        self.add_exp = add_exp
+        self.special_attacks = special_attacks or {}
+        self.persistent = persistent
+        self.combat_config = combat_config or {}
+
+        # Load monster information from some data source
+        monster_info = self.load_monster_info(monster_name)
+        
+        # Set up stats and attack parameters
+        self.health = monster_info["health"]
+        self.attack_damage = monster_info["attack_damage"]
+        self.melee_attack_radius = monster_info["melee_attack_radius"]
+        self.ranged_attack_radius = monster_info["ranged_attack_radius"]
+        self.attack_cooldown = monster_info["attack_cooldown"]
+        self.attack_action_cooldown = monster_info.get("attack_action_cooldown", 1000)
+        self.can_attack = True
+        self.last_attack_action_time = 0
+        self.melee_attacks = monster_info.get("melee_attacks", [{"damage": 10, "cooldown": 1000}])
+        self.ranged_attacks = monster_info.get("ranged_attacks", [{"type": "fireball", "damage": 15, "cooldown": 1500}])
+
+        # Parry parameters
+        self.parry_chance = monster_info.get("parry_chance", 0.2)
+        self.parry_cooldown = monster_info.get("parry_cooldown", 1000)
+        self.parry_cooldown_event = pygame.USEREVENT + 1
+
+        # Status effects
+        self.stun_start_time = 0
+        self.stun_duration = 0
+        self.frozen = False
+        self.freeze_duration = 0
+        self.freeze_time = 0
+        self.current_attack_type = None
+
+        # Initialize the appropriate combat strategy
+        attack_type = monster_info.get("attack_type", "melee")
+        parry_effects = self.combat_config.get("parry_effects", {})
+        movement_strategy = self.combat_config.get("movement_strategy", "offensive")
+
+        if attack_type == "melee":
+            self.combat_strategy = MeleeCombatStrategy(self.melee_attacks, parry_effects, movement_strategy)
+        elif attack_type == "ranged":
+            self.combat_strategy = RangedCombatStrategy(self.ranged_attacks, parry_effects, movement_strategy)
+        elif attack_type == "mixed":
+            self.combat_strategy = MixedCombatStrategy(self.melee_attacks, self.ranged_attacks, parry_effects, movement_strategy)
+
+        self.movement_state = movement_strategy
+
+    def load_monster_info(self, monster_name):
+        # Load monster data (placeholder implementation)
+        return {
+            "health": 100,
+            "attack_damage": 10,
+            "melee_attack_radius": 50,
+            "ranged_attack_radius": 100,
+            "attack_cooldown": 1000,
+            "attack_action_cooldown": 1000,
+            "melee_attacks": [{"damage": 10, "cooldown": 1000}],  # Multiple melee attacks
+            "ranged_attacks": [{"type": "fireball", "damage": 15, "cooldown": 1500}],  # Multiple ranged attacks
+            "parry_chance": 0.2,
+            "parry_cooldown": 1000,
+            "attack_type": "mixed"
+        }
+
+    def get_player_distance_direction(self, player):
+        enemy_vec = pygame.math.Vector2(self.rect.center)
+        player_vec = pygame.math.Vector2(player.rect.center)
+        distance = (player_vec - enemy_vec).magnitude()
+        if distance > 0:
+            direction = (player_vec - enemy_vec).normalize()
+        else:
+            direction = pygame.math.Vector2()
+        return distance, direction
+
+    def detect_projectiles(self, enemy):
+        # Placeholder for detecting projectiles
+        return pygame.sprite.spritecollide(enemy, enemy.groups, False)
+
+    def get_damage(self, player, attack_type):
+        if self.vulnerable:
+            self.hit_sound.play()
+            self.direction = self.get_player_distance_direction(player)[1]
+            if attack_type == "weapon":
+                if random.random() < self.parry_chance:
+                    self.status = "parry"
+                    self.trigger_parry_effects(player)
+                else:
+                    self.health -= player.get_full_weapon_damage()
+            else:
+                self.health -= player.get_full_magic_damage()
+            self.hit_time = pygame.time.get_ticks()
+
+    def trigger_parry_effects(self, player):
+        parry_effect = random.choice(list(self.parry_effects.values()))
+        if parry_effect == 'stun':
+            player.status = 'stunned'
+            player.stun_duration = 1000
+            player.stun_start_time = pygame.time.get_ticks()
+        elif parry_effect == 'freeze':
+            player.status = 'frozen'
+            player.freeze_duration = 1000
+            player.freeze_time = pygame.time.get_ticks()
+        # Add more parry effects as needed
+
+    def actions(self, player):
+        self.combat_strategy.decide_action(self, player)
+        self.combat_strategy.move(self, player)
+        if self.status == "attack":
+            self.combat_strategy.execute_attack(self, player)
+        self.combat_strategy.parry(self, player)
+
+    def update(self, QuadTree, entity_quad_tree, dt=None):
+        current_time = pygame.time.get_ticks()
+        if self.frozen and current_time - self.freeze_time > self.freeze_duration:
+            self.thaw()
+        if not self.frozen and self.status == 'move':
+            self.move(speed=self.speed, QuadTree=QuadTree, entity_quad_tree=entity_quad_tree)
+            self.hit_reaction()
+        self.animate()
+        self.cooldowns()
+        self.check_death()
+
+    def enemy_update(self, player):
+        if not self.frozen:
+            self.get_status(player)
+            self.actions(player)
+
+    def move(self, speed, QuadTree, entity_quad_tree):
+        # Implement movement logic
+        pass
+
+    def hit_reaction(self):
+        # Implement hit reaction logic
+        pass
+
+    def animate(self):
+        # Implement animation logic
+        pass
+
+    def cooldowns(self):
+        # Implement cooldown logic
+        pass
+
+    def check_death(self):
+        # Implement death checking logic
+        pass
+
+    def thaw(self):
+        # Implement thawing logic
+        pass
+
+    def get_status(self, player):
+        # Implement status checking logic
+        pass
+
+			   		   
+			   		   
+			   		   
+			   		   
+			   		   
+			   	
+			   	
+			   	
+			   
+			   
+	
+	 
+	2. move evasively
+	3. occasionally big knockback melee
+	4. I want him to spawn mini ghosts
+
+    create dwarf stronghold
+    create jungle level
+    
+    leveling and skills
+    consumables and item usage
+    networking
+    done
+
+
+
+smart way to place objects ? i could just use my builder but adapt it to just create object files.
+-> place all drawrf shit in the pallete and go nuts
+
+
+
+
+
+I have a problem where insdie the cave my obstruction work, but outside i am walking through. 
+
+# I think the difference is that i have small obstructions inside, this means that when i pass one small obstruction, i am getting
+  two collisions backwards, as i get futher in, it pushed me further out, when I'm outside, 4 pixel knockbackkeeps me out (it outpases
+  the movement ) 
+  
+  I need some solution for this, be it, calculate how far inside i am and knockback further or apply a double layer like inside...
+  i dno.
+  
+  
+  
+  ok, so create 
+  
+  1.  new sizing and obstruction for new level,
+  2. spawn mage
+  3. chest
+  4. other objects in new and old level.
+  
+  
+  Just stretching the ice cave looks awesome. 
+  
+  
+  
+
+
+
+#### Ok, time to do some image stuff. 
+
+
+1. Ice sliding down glacier !
+2. cave level
+	2.1. torches
+3. bats
+4. gold
+5. big hell spawner
+6. skeletons
+7. other enemies.
+
+
+-------> Goro will be in the cave and you gave to kill him to unlock him.
+
+Do skill and attributes and level up screen.
+when you start level, you should get this screen, you adjust attributes
+
+attempt at using a full image as a level, just controlling obstruction matrix could be fun.
+we have a great image for the ice palace
+
+Jump straight into networking :::/
+-----> I'm gona do some fluffy networking :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I need to build a logger that i can control more effectively thn these prints, 
+log everything, maybe start making some tests ? 
+
+hmmm..... ok issues with collisions, the 
+
+1.nearby obstacles does not suffice, when there is an obstacle even 'near' to a big entity, it doesnt collide with entities, we need to do a further .... maybe rect check
+
+2. when entity is stationary, its a wall, even if its small.need knockaback and also
+   running into a stationary entity should...have no rebound for much larger entity...
+   shall we use some physics ? 
+  
+
+3. i need collisions to take into account speed, maybe this covers the above too,
+   if a bigger guy runs into a smaller guy , he is still bounced back, 
+   
+   there is kind of a cool dynamic where if they are moving fast, they still advance,
+   the amount which they advance should be to do with their 'weight' for now size of
+   image, the movement should interact with the collision, i need to pass speed to it
+   
+   
+   WL:
+   1.ITS REALLY ONE ISSUE, Q TREE NEEDS MOVEMENT AND SPEED, also pass from move to collision
+   for speed. 
+   
+   2.when they attack some how check collisions with a mask of just their lower half, like you
+     can slip but you cant run through them , sick
+   
+   Key is to be able to adjust both colliding sprites , maybe colliding in the move method 
+   is not optimal. the thing is it feels close to something, this could be a big change, 
+   if i can just change the entity you are colliding with acting like a wall...
+   
+   
+   WL:
+    on update,  just run "check_collision" as well as movement
+   and then the guy running into you acts as he acts, you act as you act. 
+   i like this, it bypasses a physics engine.
+   
+   1.go into Enemy , etc and add to update method (check_collision, run a single check_collision...its a parent method but you can still call it, right  ?)
+   
+   
+   extra.maybe move should be recursive too...? i need multiple sprites to interact quickly, 
+   but it would be cool if the displacement from the collisions noticed collisions
+   ad infinitum.
+   
+   
+   
+   
+   
+   
+   
+   TODO : invulnerable logic is off, i took it off bcoz i dont like the blinking, 
+          but now everyone takes massiv damage. 
+          
+          TASK: mask up the collisions of objects. 
+          
+          AS IS: when an object is placed, it takes the image, scales it, then for each
+                 square it occupies, it addes a single tile obstruction.
+                 
+                 
+                 
+                 
+I create objects like this 
+
+
+    def instantiate_object(self, image_path, object_info):
+        image = pygame.image.load(image_path).convert_alpha()
+        image_tile_width = object_info.get("width")
+        image_tile_height = object_info.get("height")
+        image = pygame.transform.scale(image, (self.TILESIZE * image_tile_width, self.TILESIZE * image_tile_height))
+    
+        image_x_pos = object_info.get("x_pos") * self.TILESIZE
+        image_y_pos = object_info.get("y_pos") * self.TILESIZE
+    
+        # Dynamic handling based on type
+        object_type = object_info.get("type",'')
+        #print(f"object info:{object_info}")
+        if object_type == "tree":
+            
+            sprite_animation_config = object_info.get("sprite_animation_config")
+            #print(f"ATTEMPTING TO CREATE TREE    config:{sprite_animation_config}")
+            self.instantiate_tree(image_x_pos, image_y_pos, sprite_animation_config)
+        else:
+            Tile((image_x_pos, image_y_pos), [self.visible_sprites], "object", image)
+    
+        # Common methods for all objects
+        self.handle_obstruction_matrix(image_x_pos, image_y_pos, object_info)
+        self.handle_spawn_area(image_x_pos, image_y_pos, object_info)
+        self.handle_triggers(image_x_pos, image_y_pos, object_info)
+    
+    def instantiate_tree(self, x_pos, y_pos, sprite_animation_config):
+        
+        Tree((x_pos, y_pos), [self.visible_sprites, self.obstacle_sprites], sprite_animation_config)
+        
+    
+    def handle_obstruction_matrix(self, x_pos, y_pos, object_info):
+        #print("in obstruction matrix")
+        obstruction_matrix = object_info.get("obstruction_matrix", [])
+        for y_offset, row in enumerate(obstruction_matrix, start=-1):
+            for x_offset, cell in enumerate(row):
+                if cell == 1:
+                    boundary_x = x_pos + (x_offset * self.TILESIZE)
+                    boundary_y = y_pos + (y_offset * self.TILESIZE)
+                    new_tile = Tile((boundary_x, boundary_y), [self.obstacle_sprites], 'invisible')
+                    #self.add_obstacle_sprite_to_quad_tree(new_tile.rect) only creating QuadTree after initial layout initialization now
+                    
+   
+   
+   
+   
+   
+   
+   
+   
+
+4. racoon does 0 damage ...
+
+
+
+ok, so there is a thing about the guy not actually running the move method when he 
+    is attacking, he is not moving, now that we are colliding with masks, he goes into
+    attack mode before being close enough.
+    
+    im not sure why the dude moves while attacking.
+    
+    
+    
+    they all move when attacking...i thinkit must be something to do with his mask, its
+    NEVER colliding now.
+    
+    i guess i have to check the raccoons mask.
+    
+    
+    It randomly works now when i run into racoon but not always vice versa.
+
+
+
+
+It seems that insert is never running now ???
+
+
+
+process: initialize QuadTreeManager in layout manager,
+         ->( this assures that i have access to distinct QuadTrees to adapt from single place )
+         
+         create callback functions for layout to adapt the items_map
+         
+         
+         
+         
+         
+         So if we have calls backs in the layout as follows : 
+
+
+    def add_obstacle_sprite_to_quad_tree(self, obstacle_sprite):
+        # Add the obstacle sprite to the quadtree
+        if self.obstacle_quad_tree:
+            self.obstacle_quad_tree.insert(obstacle_sprite)
+            
+    def remove_obstacle_sprite_from_quad_tree(self, obstacle_sprite):
+        # Remove the obstacle sprite from the quadtree
+        if self.obstacle_quad_tree:
+            self.obstacle_quad_tree.remove(obstacle_sprite._id)
+           
+           
+   my concern is that the QuadTree insert function calls remove, maybe we need to pull this
+   out so that we can do it with the callback and it does not just run in the insert method
+   i really do not see why this would be a problem actually, lets try without, just
+   passing insert callback to the entity.
+   
+   
+   ok, the thing is that the remove is in the insert and it calls self.remove, this is a node
+   not the manager, it is the manager that needs the remove can the node itself call the manager?
+   
+   
+   yea , the remove method is not correct. it is asking for a node from the mapping
+   and from the manager, but then using this node to delete, i need to actually 
+   access the correct node.
+   
+   its the quad tree manager that should insert and remove.
+   
+   
+   
+   
+   
+   
+   but you would only be questioning if self.is_stopping when idle, as i showed you, currently , when check.interactable_tile happens, there is potential to stop walking , and this logic is actually contained in the distinct children that overwrite the perform_action method, i think i need to pull apart some of the logic in check_interactable_tile, one thing is to check if you can interact with the tile, but, its entirely different thing to interact with the tile, if the entity is going to interact with a tile,  we know its status is going to change from walking, at this point we could run a final self.move with the after changing the entities direction and with speed 0. This would update the QuadTree with a stationary value at the end of every walking sequence. 
+
+here is the check tile method: 
+
+    def check_interactable_tile(self):
+        #print(f"rect center : {self.rect.center}")
+        position = self.rect.center
+        position = ( (position[0] // TILESIZE) * TILESIZE, (position[1] // TILESIZE) * TILESIZE )
+
+               
+               
+               
+               
+               
+               
+               
+               
+               
+I am changing the perform actions logic so that i can register the hault in movement in the 
+quadtree. 
+
+i have changed check_til interaction, i still need to remember what all this on below 
+etc logic was, im not returning the tile pos to pass to perform action. 
+
+i also then need to use super in the Eskimo and Polarbear perform action methods.
+
+
+The interaction  of the perform method in neutral char and specific chars
+is interesting, 
+               
+               
+               i am 
+               
+               
+The prints about polar bears are interesting, it seems to show polar bears moving 
+one way and then the exact opposite, is the displacement of the bear causing its own collision 
+?
+
+
+
+ok, im looking at the mask work i did, i think i couldnt convert the animations to masks. 
+
+but i have a function , lets test it.
+
+
+IT turns out that the left right thing is being implemented for enemies....
+
+mask collisions:
+
+need to update quadtree every frame in order to keep the masks for collisions.
+
+
+
+
+
+
+
+So previously, i had no issue with animation set for racoon , 
+it seemingly had the "animations_left_right_indicator" and skipped this part.
+
+it seems to not be the racoon that is showing me
+
+
+
+WL:
+okay, it seems to be erroring before the masks are created somehow.
+
+ITS SHOWING ME THAT THE INITIAL ANIMATIONS ARE IN LEFT RIGHT BEFORE CHANGING
+TO MASKS, THEN IN ANIMATE, THE MASKS HAVE A DIFFERENT FORMAT.
+
+
+
+
+
+
+collisions decent, need to make sure attacking doesnt messup collisions
+
+
+
+
+
+
+
+
+
+
+               
+               
+               
+               
+               
+               
+                
+    
+        tile_valid_actions = self.get_tile_valid_actions(position,self.interact_only_on_tile_below)
+        #print(tile_valid_actions)
+        if tile_valid_actions:
+            set_of_valid_actions = tile_valid_actions[1]# just splitting info from returned values , gives a dict and a set 
+            tile_valid_actions  = tile_valid_actions[0]
+            
+            #print(f"tile valid actions : {}")
+            
+            ### Change from taking a single set of valid actions and applying them to the tile below to
+            ##  figure out possible tiles to interact with
+            ##  choose which tile (one your facing first)
+            ##  rotate sprite to face that tile.
+                
+            if self.interact_only_on_tile_below:
+                
+                tile_valid_actions = tile_valid_actions.get('on')
+                possible_interactions = set_of_valid_actions.intersection(self.interactable_tile_types)
+                if len(possible_interactions) > 0:        
+                    for possible_interaction in possible_interactions:
+                        if random.random() < 0.1:  
+                            #print(f"ATTEMPTING TO PERFORM ACTION: {possible_interaction}")
+                            self.perform_action(possible_interaction,position)
+            else:
+                        # if multiple type of interaction to do choose here
+                possible_interactions = set_of_valid_actions.intersection(self.interactable_tile_types)
+                if len(possible_interactions) > 0:
+                    possible_interaction = list(possible_interactions)[0]
+                    # get all touching tiles you could do it on
+                    possible_interaction_tiles = []
+                    for tile_pos in tile_valid_actions.keys():
+                        if possible_interaction in tile_valid_actions[tile_pos]:
+                            possible_interaction_tiles.append(tile_pos)
+                    
+                    if random.random() > 0.9:
+                        choice = random.choice(possible_interaction_tiles)
+                        if choice =='right':    
+                            position = (position[0] + TILESIZE, position[1])
+                        if choice =='left':    
+                            position = (position[0] - TILESIZE, position[1])
+                        if choice =='above':    
+                            position = (position[0] , position[1] - TILESIZE)
+                        if choice =='below':    
+                            position = (position[0] , position[1] + TILESIZE)
+                        print("performing action ")
+                        self.perform_action( possible_interaction) 
+                        
+we should True of False and "possible_interactions" as a tuple from this function instead and inside the roam if walking if , use self.perform_actions(possible_interactions) after making the changes to direction and making the final move at speed 0, Im thinking it is probably a good idea to change status back to 'idle' before performing the actions too, the actions then do all sorts of stuff we may have to control later but this should work for now
+   
+   
+   
+   
+   
+   
+   
+   
+   WL: i need to check why the trigger back to map 7 is not working in scorpions hut.
+   
+   looks prty nice, 
+   
+   like santi said, input needs to be crisp, need to isolate that thread
+   at 60 fps.
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   #### We have achieved something, there are still legacy objects being kept in the
+        mapping and i need to profile it all. TMROW.
+        
+        
+        
+   ### Ok, so it turns out i call manager.remove in the insert, just calling the remove
+       prior to the insert may not work for some reason.
+       
+       if this is true, what i need to do it just pass the 
+       
+       
+       Entity doesnt exist, we pass remove = false one time : 
+       
+       doesnt run main remove
+       
+       does run insert remove, with remove = True, so ultimately the if doesnt work
+       and it removed it anyway....
+       
+       if its inserted , it is then placed inside again, for the final run 
+       of an entity, it should still remove but the not insert again.
+       
+       
+       
+       Somehow the remove function in the manager, unless its called from the node, 
+       does not work to remove the value it seems.
+       
+       
+       
+       
+       Ok, its working, needs cleanup.....
+       
+       
+       
+       ok, i need to adjust the daylight situation
+       
+       
+       
+       
+       
+       ## Im passing the Quadtree from previous layout to the new layout, 
+          i need to reinintialize them actually, but the function expects 
+          something to be passed, i could reinitiate i guess, it already 
+          re initiates, hmmmm take a look
+          
+          
+          ok so the quad trees get restarted, but it doesnt have the correct effect
+          i guess the level.layout_manager is not updated ? 
+          
+          
+          ok, what seems to be happening is the start_map of the level changes the layout manager
+          if passed to it, but still , after initialize layout, the layout manager
+          of the level is not changed, it is just changed within the contet of this method
+          .
+          
+          well...... no the actual layout manager in question runs it , it should be updated.
+          
+          
+          
+          
+          
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        
+        
+        
+        
+        
+        
+        
+        
+ #######    Fuck, even after splitting the quad tree into two, the original
+            objects are not obstructing, 
+            
+            im starting to think its actually that the entities that collide with
+            non updating entites will not block them....something about
+            the player constantly deleting anything in his spot... hmmm nahhh
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   In order to reduce the time of inserts, particularly when keeping my map of 
+   items and nodes for efficient removal, i keep QT.num_items, the problem is, 
+   
+   then , every time an entity moves, i remove the value from items.
+   
+   ---> This means that the logged value for a previous item is wrong, 
+        a hacky way would be to adapt the map then and there, adding -1 to all values
+        at that node with higher indexes. 
+        
+   another idea is to just leave a place holder for that ID, use the map for insertion too
+   this could be alrighthard to manage....
+   
+   I think im going to try the adding values to the other mapping values.
+   
+   
+   
+   is the solution to have self.items be a dict  ? might mess with other efficieny ideas.
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+
+SITCH : 
+
+I am actually using callbacks, i have the insert call back, but i need the remove callback
+ to right ? 
+ 
+ 
+ 
+ 
+ 
+ 
+ Check if the QuadTree is arriving properly to the entity.
+ 
+ also, im passing the callback to "update" i assume thats not removing.
+ the removing is meant to be happening inside the QuadTree ? urg.
+ 
+ 
+ I JUST HAVE TO PASS CALLBACKS TO ENTITIES AND WE DONE 
+ but it was working ..... the reason it stopped working is the new remove method 
+ that is quick.....we think.....
+
+
+
+you are telling me that it should work fine as is, it doesnt . this is the definition of the QuadTree
+
+
+class QuadTreeManager:
+    def __init__(self):
+        self.item_mapping = {}
+
+    def add_mapping(self, item_id, node, index):
+        self.item_mapping[item_id] = (node, index)
+
+    def remove_mapping(self, item_id):
+        del self.item_mapping[item_id]
+
+    def get_mapping(self, item_id):
+        return self.item_mapping.get(item_id, (None, None))
+
+global_manager = QuadTreeManager()
+class QuadTree(object):
+    """An implementation of a quad-tree.
+ 
+    This QuadTree started life as a version of [1] but found a life of its own
+    when I realised it wasn't doing what I needed. It is intended for static
+    geometry, ie, items such as the landscape that don't move.
+ 
+    This implementation inserts items at the current level if they overlap all
+    4 sub-quadrants, otherwise it inserts them recursively into the one or two
+    sub-quadrants that they overlap.
+ 
+    Items being stored in the tree must be a pygame.Rect or have have a
+    .rect (pygame.Rect) attribute that is a pygame.Rect
+	    ...and they must be hashable.
+    
+    Acknowledgements:
+    [1] http://mu.arete.cc/pcr/syntax/quadtree/1/quadtree.py
+    """
+
+    def __init__(self, items, depth=8, bounding_rect=None,manager=None):
+        """Creates a quad-tree.
+ 
+        @param items:
+            A sequence of items to store in the quad-tree. Note that these
+            items must be a pygame.Rect or have a .rect attribute.
+            
+        @param depth:
+            The maximum recursion depth.
+            
+        @param bounding_rect:
+            The bounding rectangle of all of the items in the quad-tree. For
+            internal use only.
+        """
+        self.manager = manager
+        self.num_items = 0
+        #print("STARTING THE QUAD TREE !! ! ! ! ! ! ")
+        # The sub-quadrants are empty to start with.
+        self.nw = self.ne = self.se = self.sw = None
+        #print(depth)
+        #print(bounding_rect)
+        #print(items)
+        # If we've reached the maximum depth then insert all items into this
+        self.item_mapping = {}
+        # quadrant.
+        self.depth = depth
+        depth -= 1
+        
+        
+        
+        
+        if bounding_rect:
+            bounding_rect = Rect( bounding_rect )
+            #print(bounding_rect)
+            
+        else:
+            # If there isn't a bounding rect, then calculate it from the items.
+            bounding_rect = Rect( items[0] )
+            for item in items[1:]:
+                bounding_rect.union_ip( item )
+        self.bounding_rect = bounding_rect
+        #print("MADE IT TO THIS PART OF THE QUAD TREEEE YAAAY")
+        #print(f"depth:{depth}")
+        cx = self.cx = bounding_rect.centerx
+        cy = self.cy = bounding_rect.centery
+        
+        if depth == 0  or not items:
+            self.items = items
+            return
+        #print("MADE IT TO THIS PART OF THE QUAD TREEEE YAAAY")
+        # Find this quadrant's centre.
+
+        #print(f" JUST DEFINED THE CX OF MAIN QUADTREE : {self.cx}")
+        
+        #print(self.cx, self.cy)
+
+        self.items = []
+        nw_items = []
+        ne_items = []
+        se_items = []
+        sw_items = []
+
+        for item in items:
+            # Which of the sub-quadrants does the item overlap?
+        
+            in_nw = item.left <= cx and item.top <= cy
+            in_sw = item.left <= cx and item.bottom >= cy
+            in_ne = item.right >= cx and item.top <= cy
+            in_se = item.right >= cx and item.bottom >= cy
+                
+            # If it overlaps all 4 quadrants then insert it at the current
+            # depth, otherwise append it to a list to be inserted under every
+            # quadrant that it overlaps.
+            if in_nw and in_ne and in_se and in_sw:
+                self.items.append(item)
+            else:
+                if in_nw: nw_items.append(item)
+                if in_ne: ne_items.append(item)
+                if in_se: se_items.append(item)
+                if in_sw: sw_items.append(item)
+            
+        # Create the sub-quadrants, recursively.
+        if nw_items:
+            self.nw = QuadTree(nw_items, depth, (bounding_rect.left, bounding_rect.top, cx, cy), manager = global_manager)
+        if ne_items:
+            self.ne = QuadTree(ne_items, depth, (cx, bounding_rect.top, bounding_rect.right, cy), manager = global_manager)
+        if se_items:
+            self.se = QuadTree(se_items, depth, (cx, cy, bounding_rect.right, bounding_rect.bottom), manager = global_manager)
+        if sw_items:
+            self.sw = QuadTree(sw_items, depth, (bounding_rect.left, cy, cx, bounding_rect.bottom), manager = global_manager)
+ 
+    
+    @profile
+    def hit(self, rect):
+        """Returns the items that overlap a bounding rectangle.
+ 
+        Returns the set of all items in the quad-tree that overlap with a
+        bounding rectangle.
+        
+        @param rect:
+            The bounding rectangle being tested against the quad-tree. This
+            must possess left, top, right and bottom attributes.
+        """
+    
+        # Initialize an empty set for hits
+        hits = set()
+    
+        # If there are items in the quad-tree
+        if self.items:
+            # Collect items that overlap with the rectangle
+            hits.update(item for item in self.items if item.rect.colliderect(rect) and item._id != rect._id)
+
+
+        # Recursively check the lower quadrants.
+        if self.nw and rect.left <= self.cx and rect.top <= self.cy:
+            hits |= self.nw.hit(rect)
+        if self.sw and rect.left <= self.cx and rect.bottom >= self.cy:
+            hits |= self.sw.hit(rect)
+        if self.ne and rect.right >= self.cx and rect.top <= self.cy:
+            hits |= self.ne.hit(rect)
+        if self.se and rect.right >= self.cx and rect.bottom >= self.cy:
+            hits |= self.se.hit(rect)
+        return hits
+    
+    
+    
+    @profile
+    def remove(self, item_id):
+        node, index = self.manager.get_mapping(item_id)
+        
+        #print(f"REMOVE node : {node}")
+        #print(f"REMOVE index : {index}")
+        
+        #print(self.manager.item_mapping)
+        if node is None or index is None:
+            return False  # Item not found
+        #print(f" REMOVE {node.items}")
+        
+        del node.items[index]
+        node.num_items -= 1
+
+        # Remove the mapping from centralized item mapping
+        #self.manager.remove_mapping(item_id) # dont think its necessary, overwrites itself in insert
+        
+        
+            
+    @profile
+    def insert(self, item):
+        """Inserts an item into the quad-tree.
+    
+        @param item:
+            The item to insert into the quad-tree. The item must possess
+            left, top, right, and bottom attributes.
+        """
+        if item in self.items:
+            return
+        
+        
+        self.remove(item._id)
+        
+        
+        if self.depth ==1:
+            self.items.append(item)
+            self.manager.add_mapping( item._id ,self, self.num_items)  # Store node and index
+            self.num_items += 1
+            print("INSERT DEPTH == 1 ")
+            print(f"INSERT node : {self}")
+            print(f"INSERT id : {item._id}")
+            print(f"INSERT num items state : {self.num_items}")
+            print(f"INSERT Item mapping state  : {self.manager.item_mapping}")
+            return
+        
+        This is how i instantiate it in the layout manager : 
+
+
+        items = []
+        for sprite in self.obstacle_sprites:
+            #left, top, width, height = sprite.rect
+            #right = left + width
+            #bottom = top + height
+            item = HashableRect(sprite.rect)
+            items.append(item)
+            
+        self.obstacle_quad_tree = QuadTree(items = items,
+                                           depth=8,
+                                           bounding_rect=pygame.rect.Rect(0,0,self.csv_layout_width,self.csv_layout_height),
+                                           manager = QuadTreeManager()) # this would actually need the size of the map bounding_rect=(0, 0, HEIGHT, WIDTH)
+                
+
+This is how i then pass it to the update method in the level run method 
+                    self.layout_manager.visible_sprites.update_parallel( obstruction_quad_tree = self.layout_manager.obstacle_quad_tree,
+                                                                         dt=dt,
+                                                                         weather = self.weather, 
+                                                                         wind_force=wind_force )
+
+Then in the entity the quad tree is used like this 
+
+
+    def move(self, speed, QuadTree, update_quad_tree = True):
+        
+        
+        if update_quad_tree:
+            self.layout_callback_update_quad_tree( HashableRect( self.rect, self.id ) )
+        
+        #if hasattr(self, "sprite_type" ): 
+            #print(f"{self.sprite_type}")
+            #if self.sprite_type == "neutral":
+                #print(dir(self))
+        #print(f"attempting to move with speed : {speed}")
+        #print(f"position before move : {self.pos}")
+        #print(speed)
+        if self.direction.magnitude() != 0:
+            self.direction = self.direction.normalize()
+#        print("DIRECTION")
+#        print(self.direction.x)
+        
+        
+        #print(f"speed: {speed}")
+#        print(self.animation_speed)
+#        print(self.direction)
+#        print(self.direction.magnitude())
+        #print(f"rec center pre move  : {self.rect.center}")
+        #print(f"hitbox pre move  : {self.hitbox.x}")
+        #print(f"hitbox pre move  : {self.hitbox.y}")
+        #print(f"direction : {self.direction}")
+        
+        #print(f"direction x : {self.direction.x}")
+        self.hitbox.x += self.direction.x * speed
+        #print(f"hitbox post move  : {self.hitbox.x}")
+        
+        
+        
+        ### TODO :it seem like i am passing horizontal and vertical to collision wrongly, also, it only needs to be run once.
+        
+        
+        #self.collision_old("Horizontal")
+        #self.collision_old2("Horizontal")
+        self.hitbox.y += self.direction.y * speed
+        #print(f"hitbox post move  : {self.hitbox.y}")
+        
+        #self.collision("Vertical",QuadTree=QuadTree)
+        self.rect.center = self.hitbox.center
+        #print(f"rec center post move  : {self.rect.center}")
+        
+        self.collision( QuadTree=QuadTree )
+        
+    
+    
+    
+    @profile
+    def collision(self,  QuadTree ):
+        # Define displacement for collision resolution
+        displacement = 5  # Adjust this value as needed
+        
+        # Check for nearby obstacles using the QuadTree
+        nearby_obstacles = QuadTree.hit( HashableRect(self.rect, self.id) )
+        
+        #if isinstance( self, SpecificPlayer):
+        #print(type(self))
+        #print(self.rect)
+        #print(nearby_obstacles)
+    
+        # Iterate over nearby obstacles
+        for obstacle in nearby_obstacles:
+            # Calculate the angle of collision relative to the entity's movement direction
+            angle_radians = math.atan2(self.direction.y, self.direction.x)
+            angle_degrees = math.degrees(angle_radians)
+            
+            # Calculate the angle between the entity's direction and the collision normal
+            collision_normal = math.atan2(obstacle.rect.centery - self.rect.centery, obstacle.rect.centerx - self.rect.centerx)
+            
+            # Calculate the rebound angle (opposite angle)
+            rebound_angle = collision_normal + math.pi
+            
+            # Adjust the position of the entity based on the rebound angle
+            self.hitbox.left += displacement * math.cos(rebound_angle)
+            self.hitbox.top += displacement * math.sin(rebound_angle)
+
+
+
+
+
+
+
+WL:
+
+
+
+the player update in the start new layout process resets the position of the player,
+i thought based on his movement. i added a param to the player.update to pass when
+im updating the player in the layout change, this stops the correct positioning happening
+(resets players position to that of the trigger in the previous map + the direction he was moving ) the single update with the no move param also makes the player not be able to move
+
+ok, we solved this nonsense atleast.
+
+
+STATUS:
+
+made the quickest dirtiest changes to remove daytimeoverlay and weather when i go 
+inside, need to think about how to do that, i think as opposed to 
+making daytimeoverlay None and if in run i just adapt daytime overlay
+to have an indoords method. 
+
+-> go in and fix this. 
+---->* these crappy changes also highlighted an issue with dt i think
+        the wierdness about frame rate, as soon as i remove weather from 
+        the updates, the frame rate is declared lower ( maybe like the dt i define in run)
+        and the game is going hyper fast.
+        
+        
+        before i try to address all of this above mess, i will have another go at the 
+        threding strat, last time the game just stopped, i guess this is an issue 
+        of pygame not being threadsafe, hopefully just with sprites it works.
+        
+        some how dt is being passed as all the sprites.
+        
+        
+        the threading for updating sprites seemed to improve efficiency quite nicely.
+        
+        i wonder if i can thread the draws too.
+        
+        
+        
+        
+        
+  WL: i seem to have lost all the benefits of parralelism somehow.
+  
+       
+        
+        
+        
+        
+        
+        
+        
+        
+------> I should definately understand this before moving on.
+
+
+quickly do a little scorpions hut
+
+	0. change daytime overlay ( just dim light, probly should be paramed in the
+	                             initial.txt ) 
+	1. make it smaller
+	2. fix ground blackness
+	3. make door trigger back
+	
+				## It seems when i trigger there, the position
+				    of the player is not changed because
+				    i try to change the layout_manager.player
+				    where really its the level that hs player
+				    player is a sprite in layout_manager.visible_sprites
+				    tho, i think.....
+				    urg i dno.
+				    
+				    right, yea , so i have passed the correct player to
+				    the layout manager, but 
+				    
+				    ok, previously i would initialize the layoutmanager
+				    and then in the level init, set the player to
+				    the layout manager.
+				    
+				    when i restart, i am reinitializing the level,
+				    with the old layout manager, which i restart
+				    i then change the player position in the layout manager
+				    
+				    in the initial init, isthe player positioning what is used ? 
+				    i thought it was just hard coded as 10*tilesize
+				    
+				    
+				    NEW CLUE : 
+				    
+				    the layout change prints happen twice, 
+				    its as if it changes layout once and then again
+				    the second one prints correct player pos
+				    but the player pos is not adapted, 
+				    the first one has player pos arriving to the 
+				    layout change as None.    
+
+
+					how on earth is this happening ? 
+
+
+					-> Its because its in the init method ! 
+					   the init method of the layoutmanager
+					   runs and then i call instantiate layout too
+					   right ? 
+				    
+				    
+		
+				    the above was true but has not changed the position
+				    issue.
+				    
+				    
+	
+	4. trsure chest, furniture, moose head, carpet
+
+
+
+
+I did a really shitty attempt to make the triggers work with the new grass and watertile
+rendering, did not work. maybe take a step back, window literally closes and reopens , that sux,
+-> it also feels close to work... maybe lets get it working and then revaluate.
+
+
+it seems like the layout_manager restart at the end might be the issue:
+
+I think i have to set the grass manager to none, starts lagging its ass off
+and has grass shown.
+
+
+### Ok so although i do want to be able to insert and remove from the 
+     quad tree, i should probably create it once all of the obstacle sprites have been
+     defined and i just pass all of the obstacle sprites to it.
+     
+     so annoying that this motherfucker coudltn find the most basic usage of this shit
+     urg fuck
+     
+     
+     I have somehow converted my sprite in Entity to a hashable rect....
+     
+     
+     Done ish
+     
+     traps need to no be passed it too.
+     
+     
+     
+     So im thinking about updating the quadtree with entity movement in the move
+     func, i'm hoping it is under 100ms and then maybe its viable.
+     
+     
+     
+     
+     ## Other ideas for updateing quadtree:
+     
+     Bounding volume hierarchy (BVH): BVH is another spatial partitioning technique that's efficient for dynamic scenes. It organizes objects into a tree structure based on their bounding volumes (e.g., bounding boxes), allowing for fast collision detection and updates.
+     
+     Lazy updates: Rather than updating the Quadtree immediately, you could defer updates until they are necessary. For example, you might mark entities as "dirty" when they move and then update the Quadtree lazily, perhaps during the next frame update or when collision detection is required.
+     
+      Consider using other spatial partitioning techniques that support dynamic updates more efficiently. Some data structures, like R-trees or BSP trees, handle dynamic updates more gracefully than Quadtrees.
+      
+      
+      
+      something hasgone really wrong, i guess i need to use r-tree or sumin
+      
+      its as if i am being obstructed constantly, same for all entities.
+      
+      
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+
+
+
+
+
+The update_parralel actually takes longer now.
+
+printing was the main issue it seems.
+
+so now i want to limit the amount of obstacles that an enemy checks if it is coliding with
+
+the issue is that some of my obstacle sprites do not have a pos, i think it will work
+fine with the tile obstacles, but at the moment, it will not for the Animatedsprites
+
+the idea is that the tiles have a grid position in terms of tile size, i can quickly compare
+the distance....
+
+maybe i can try using the group colision.
+
+
+
+Ok, so the startm map thing within the layout isi not working
+
+
+So now its part of the Level init that i am missing.
+
+---> i am just running layout manager.initialize_layout
+
+---> i just need to run level.trigger_new_map()
+
+
+
+
+SHIT i dno how to get around this, start_map runs then the next line i NEED to run 
+w
+
+
+
+Ok, it turns out in my old level, I would try to create an object per object file, I need to adapt this.
+
+####################
+
+IDEAS FOR GRASS OPTIMIZATION:
+
+	make the outer most tiles not update .
+
+
+
+WL: I am changing manually : 
+   "image_path": "objects/healing_shrine_1.png"
+
+to 
+
+   "image_path": "../levels/Map7/start/Object/object_images/healing_shrine_1.png"
+in the output manually, I need a way to do this automatically , its just ../levels/<level_name>/<layer_name>/Objects/ in the save_level function.	
+
+
+
+
+MAKE THE ESKIMOS YOU CAN BEFRIEND TO START TO HAVE A TOWN
+
+You start just with your cabin ? You can go destroy trees and bring back wood to chop, use for fire, use for buildings, (eskimos can move in) you can get blueprints...eskmios give you certain things you can build, eskimos fish and provide you extra food ( you run to base to heal ) with wood you can build towers. And defences. 
+
+
+
+
+
+
+
+I was daydreaming about a level where the more you go up, the colder it gets ( you start on snow/ice with some water, as you go up its ice then dark ice, then just black eventually space and total abyse.Moving down it gets warmer until its effectively just a sea you cannot cross, the snow tiles should melt progressively. There is a catch, as you go down, if you can find a way to cross the sea ( build a boat or get an ability that allows you to [subzero if he levels up body temp enough can freeze water he walks on] then you can go down as it gets progresively hotter, it becomes islands then get grass lands then desert then lava y volvano area then HELL. Scorpion is there.
+
+
+I think the issue is that I have the drop info in the enemy config but not the actual enemy.
+
+
+
+
+So we have an issue that the drop information gives an item id, and that is being passed directly into 
+create_item, further complication is that the create_item function expects just to havve an item config ( built for the initial map object ) and this contains a position. What we need to do is have a map of object_id’s to object configurations, then , when you kill an enemy, you just need to adapt the original object definition to where the enemy died.
+
+
+Just write the object maps, check the drop objects you mentioned in the enemies to create them all.	
+Finish up the itemspawn of the eskimo, have holes close, then work on attacks and fighting dynamics.
+
+
+
+
+
+
+
+
+
+
+
+
+
+WL: TODO 
+
+1. backroll
+2. level up and skill and attribute management
+3. imediate fish consumption for health- Taking this, its easy.
+						WL
+						firstly, i have to adapt the eskimo
+						to the new way of recieving interactable tiles.
+
+						lets think about the frame rate set in run
+						dt is very small.
+						
+						
+						hmm crazy, items are created with effect
+						but when i call the itemvisual.item.effectype
+						in the pickup method, there is no effecttype.
+						
+
+4. build towers
+5. get resources
+6. interact more with tiles
+7. better layout
+8. enemies - did 1 doing demon dog WL: need to make enemy distance attack.
+                                       ok, so we need to do exactly the 
+                                       ice ball but for enemy attack,
+                                       the addition must be that it can fire in any direction.
+                                       
+                                       
+                                       ok plan is to pass callback to level called 
+                                       fire_projectile, 
+                                       
+                                       I need the list of special attacks to be a dict
+                                        {'projectile': <name of animation>
+                                        
+                                        look at how attacks where done previously, maybe we shouldve used that, we atleast need to have it in mind.
+                                        
+                                        Finally i have to make them damage me.
+                                        
+                                        plan is to 
+                                        
+                                        1.create enemy_attack_sprites group
+                                        2.adapt player_attack_logic
+                                         --> will need to consider if this is now
+                                             attack_collision_logic ( its also enemy projectile colision logic
+              
+              				                          
+                                        finally flip images
+                                        
+                                        ## Plan : 
+                                        
+                                        have animations[left] and animations[right]
+                                        i will change everything minimally except
+                                        that i will get the direction of the sprite
+                                        in update and animation will recieve direction
+                                        it will be used as a key for the images.
+
+
+9. other chars - did 1.5
+10. weapon and armour placement inventory
+11. attacks magic and evasion inventory
+12. bullet time
+13. multiplayer.
+14. roaming bears.	Taking this, nice n easy.
+                                       
+                                       
+                                       ## Plan
+                                       
+                                       1. Make eskimo attackable/die
+                                       2. finish adapting eskimo to polarbear
+                                       3. test interact with water tiles to drink
+                                       -> ok, i need to add config to water tiles
+                                          could be a thing seeing as they are animated tiles.
+                                          ok, yea, annoying, i think i should just layer
+                                          a watertile below.
+                                          
+                                          issue is now that i am passing all surounding
+                                          tile things, normally my process works with 
+                                          the literal tile you are standing on, 
+                                          i need to account for this in the 
+                                          NeutralCharacter.
+                                       
+                                       4. "decide to swim" and "decide to get out "
+                                       5. attack logic.
+                                       
+                                           
+        elif self.status == "move":
+
+                if pygame.time.get_ticks() - self.last_direction_update_time > self.direction_update_time:
+                    self.direction = self.get_player_distance_direction(player)[1]
+                    self.last_direction_update_time = pygame.time.get_ticks()
+                self.last_attack_action_time = pygame.time.get_ticks()# meant to stop them firing and moving but didnt work
+        else:
+            self.direction = pygame.math.Vector2()
+
+                                       
+                                       
+                                       
+15. drop money.
+16. xp bar
+17. pots on numbers
+
+### I want trippy ideas in the game
+
+18. zelda lost forest ( need particular combination of travel to get out if not its infinite ) 
+19. reality/god dynamics. Karma will exist, your luck will be offset with good/bad actions
+    this will never be shown in game its just a dynamic people may or may not figure out
+    
+20. time training like goku
+
+21. -> similar to karma, just favor in different gods eyes, like if you run away from battle
+       war gods disfavor you in future ( war randomness ) if it gets extreme it should be 
+       visual.
+       
+22. -> celular automata creature.
+
+
+##### Try spawner thread ? drawing is the main thing anyway...
+      
+      
+      
+      #### Adding fluffies grass, my problem is that it needs to be a new layer, 
+           with the current setup, i was just adding a constant to the existing layer, 
+           we have a setup where we do each folder inside the main folder as another layer though
+           ok, so i just have to create its own layer.
+ 
+ 
+###### Run line profiler :
+kernprof -l your_script.py
+     
+      
+
+
+
+## We need freeze armour magic, summon ice clone
+## We need better knockback and wresling physics
+## More interactive tiles.
+
+
+## Idea for water just having one wind intensity but making the ripple angles quite good
+
+
+
+
+JUST NEED TO DO MORE WATER TILES TO TEST THIS
+-> Next is general wind rain particles.
+
+
+I think its this dt = None thing that has fucked us.
+
+
+Maybe ill try water that is just thecalm ripple ones but increase the animation speed with wind speed,i guess i could angle them programatically too.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

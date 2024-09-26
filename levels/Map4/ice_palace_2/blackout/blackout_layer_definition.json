@@ -1,0 +1,7 @@
+{"layouts":[ {"name":"ground",
+              "csv_layout_path":"../levels/Map4/ice_test/blackout/blackout_csv.csv", 
+              "tiles":[ {"tile_image_path":"../levels/Map4/ice_test/blackout/blackout_1.png",
+                         "csv_constant_value":0} ]
+             }
+           ]
+}

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "../Map4/scorpions_hut/ground/Objects/object_images/invisible_trigger.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 9,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                
+                    [0]
+                
+                    
+               
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"../levels/Map7",
+               "new_player_position" : [11,14],
+               "trigger_matrix":[
+                [
+                    1
+                ]
+            ]}
+            
+        }
+     }
+    
+]

@@ -1,0 +1,236 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/transparent.png",
+        "object_info": {
+            "width": 1,
+            "height": 3,
+            "x_pos": 18,
+            "y_pos": 18,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],   "spawn_area": true,
+                "spawn_matrix": [[
+                                     1,
+                                     1,
+                                     1
+                                    
+                                ]],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 18,
+            "y_pos": 26,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 22,
+            "y_pos": 24,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 23,
+            "y_pos": 25,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 17,
+            "y_pos": 25,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 16,
+            "y_pos": 24,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/snake_tree.png",
+        "object_info": {
+            "width": 2,
+            "height": 3,
+            "x_pos": 19,
+            "y_pos": 24,
+            "obstruction_matrix": [
+                
+                    [1,1],
+                    [1,1],
+                    [1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                                     [0,0],
+                                     [0,0],
+                                     [1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/river_spawner.json"
+            
+        }
+    },
+        {
+        "id": "venom_plant_spawner",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/transparent.png",
+        "object_info": {
+            "width": 5,
+            "height": 5,
+            "x_pos": 5,
+            "y_pos": 60,
+            "obstruction_matrix": [
+                
+                    [0,0,0,0,0],
+                    [0,0,0,0,0],
+                    [0,0,0,0,0],
+                    [0,0,0,0,0],
+                    [0,0,0,0,0]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                    [1,1,1,1,1],
+                    [1,1,1,1,1],
+                    [1,1,1,1,1],
+                    [1,1,1,1,1],
+                    [1,1,1,1,1]     
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/plant_spawner.json"
+            
+        }
+    },
+        {
+        "id": "snake_tree",
+        "image_path": "../levels/Map8/jungle_image_layer_3/Objects/object_images/spear_house.png",
+        "object_info": {
+            "width": 4,
+            "height": 3,
+            "x_pos": 18,
+            "y_pos": 28,
+            "obstruction_matrix": [
+                
+                    [1,1,1,1],
+                    [1,1,1,1],
+                    [1,1,1,1]
+                
+            ],   "spawn_area": true,
+                "spawn_matrix": [
+                    [1,0,0,1],
+                    [1,0,0,1],
+                    [1,1,1,1]
+                                    
+                                ],
+    "spawner_config_path": "../levels/Map8/jungle_image_layer_3/Objects/hut_spawner.json"
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+]

@@ -1,0 +1,7 @@
+{"layouts":[ {"name":"ground",
+              "csv_layout_path":"../levels/Map4/scorpions_hut/ground/ground_csv.csv", 
+              "tiles":[ {"tile_image_path":"../levels/Map4/scorpions_hut/ground/ice_ground_1.png",
+                         "csv_constant_value":1} ]
+             }
+           ]
+}

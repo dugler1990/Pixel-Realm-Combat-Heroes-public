@@ -1,0 +1,80 @@
+
+{
+    "squid": {
+            "type": "squid",
+             "positions": [],
+              "persistent": false,
+               "can_follow": false,
+              "spawn_mode": "instant",
+        "attributes": {
+                        "health": 100,
+                        "exp": 180,
+                         "damage": 20,
+                         "attack_type": "slash",
+                         "speed": 3,
+                          "resistance": 3,
+                          "attack_radius": 80,
+                          "notice_radius": 360,
+                          "attack_sound": "../Audio/Attack/Slash.wav"
+                        }
+            },
+  "raccoon":{
+             "type" : "raccoon",
+             "positions": [],
+              "persistent": false,
+               "can_follow": false,
+              "spawn_mode": "instant",
+    "attributes": {
+                    "health": 300,
+                     "exp": 300,
+                     "damage": 40,
+                     "attack_type": "claw",
+                     "attack_sound": "../Audio/Attack/Claw.wav",
+                      "speed": 2,
+                      "resistance": 3,
+                       "attack_radius": 120,
+                       "notice_radius": 400
+                    }
+          },       
+
+"spirit":{
+             "type" : "spirit",
+             "positions": [],
+              "persistent": false,
+               "can_follow": false,
+              "spawn_mode": "instant",
+    "attributes":  {
+                    "health": 100,
+                    "exp": 200,
+                    "damage": 8,
+                    "attack_type": "thunder",
+                    "attack_sound": "../Audio/Attack/Fireball.wav",
+                    "speed": 4,
+                    "resistance": 3,
+                    "attack_radius": 60,
+                    "notice_radius": 350
+                    }
+          
+         },
+
+"bamboo":{            
+             "type" : "bamboo",
+             "positions": [],
+              "persistent": false,
+               "can_follow": false,
+              "spawn_mode": "instant",
+    "attributes": 
+             {"health": 70,
+               "exp": 150,
+               "damage": 6,
+               "attack_type": "leaf_attack",
+               "attack_sound": "../Audio/Attack/Slash.wav",
+               "speed": 3,
+               "resistance": 3,
+               "attack_radius": 50,
+               "notice_radius": 300}
+       }        
+
+
+}
+

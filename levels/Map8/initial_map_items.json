@@ -1,0 +1,15 @@
+[
+    {
+        "item_id": "frost_potion",
+        "positions": [
+            [4, 7],
+            [10, 15]
+        ]
+    },
+    {
+        "item_id": "ice_shard",
+        "positions": [
+            [8, 3]
+        ]
+    }
+]

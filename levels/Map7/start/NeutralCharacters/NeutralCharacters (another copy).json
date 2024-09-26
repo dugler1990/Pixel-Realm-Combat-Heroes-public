@@ -1,0 +1,28 @@
+[
+  {
+    "type": "eskimo",
+    "positions": [
+        [7, 21],
+        [8,22]
+    ],
+    "attributes": {
+        "health": 100,
+        "sprite_type": "eskimo",
+        "interactable_tile_types": ["create_fishing_hole"]
+    }
+  },
+    {
+    "type": "polarbear",
+    "positions": [
+
+        [24,12],
+        [25,12],
+        [26,24]
+    ],
+    "attributes": {
+        "health": 1000,
+        "sprite_type": "polarbear",
+        "interactable_tile_types": ["drink_water"]
+    }
+  }
+]

@@ -1,0 +1,19 @@
+{"layouts":[ {"name":"jungle_piece_1",
+	       "layer_type":"scaled_objects",
+	       "scaled_objects":[
+	       {"image_path":"../levels/Map8/jungle_image_layer_3/Objects/object_images/jungle_piece_1.png",
+	        "x_pos":0,
+	        "y_pos":24,
+	        "height":50,
+	        "width":60,
+	        "csv_definition_path":"../levels/Map8/jungle_image_layer_3/Objects/object_images/obstruction_csvs/jungle_map_3.csv",
+	        "overhead_definition_path":"../levels/Map8/jungle_image_layer_3/Objects/object_images/obstruction_csvs/jungle_map_3_overhead.csv",
+	        "tile_size_divisor": 8,
+	        "canopy_size_divisor": 8
+	       }
+	       
+	       
+	       ]
+             }
+           ]
+}

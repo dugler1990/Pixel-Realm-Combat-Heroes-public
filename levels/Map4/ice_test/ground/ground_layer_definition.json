@@ -1,0 +1,7 @@
+{"layouts":[ {"name":"ground",
+              "csv_layout_path":"../Map4/ice_test/ground/ground_csv.csv", 
+              "tiles":[ {"tile_image_path":"../Map4/ice_test/ground/ice_ground_1.png",
+                         "csv_constant_value":1} ]
+             }
+           ]
+}

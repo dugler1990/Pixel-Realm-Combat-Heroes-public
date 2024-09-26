@@ -1,0 +1,21 @@
+{
+    "Players": [
+
+        {
+            "selection_position": {"x":0,"y":0},
+            "name":"Orange_Wizard",
+            "player_info_dir":"../Graphics/Orange_Wizard/",
+             "base_stats":{"health": 1000,
+                            "energy": 60,
+                            "attack": 10,
+                            "magic": 4,
+                            "speed": 20, 
+                            "strength": 5,
+                            "vitality":10,
+                            "magic":7,
+                            "agility":6,
+                            "charisma":3}
+            
+        }
+    ]
+}

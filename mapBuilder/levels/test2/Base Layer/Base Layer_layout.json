@@ -1,0 +1,14 @@
+{
+    "layouts": [
+        {
+            "name": "Base Layer",
+            "csv_layout_path": "levels/test2/Base Layer/Base Layer_csv.csv",
+            "tiles": [
+                {
+                    "tile_image_path": "levels/test2/Base Layer/tile_images/ice_ground_1.png",
+                    "csv_constant_value": 1
+                }
+            ]
+        }
+    ]
+}

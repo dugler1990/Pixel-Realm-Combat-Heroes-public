@@ -1,0 +1,15 @@
+{"layouts":[ {"name":"ground",
+              "csv_layout_path":"../Map4/scorpions_hut/walls/walls_csv.csv", 
+              "tiles":[ {"tile_image_path":"../Map4/scorpions_hut/walls/cabin_wall_inside_left_bottom_noncorner.png",
+                         "csv_constant_value":1},
+                        {"tile_image_path":"../Map4/scorpions_hut/walls/cabin_wall_inside_left_middle.png",
+                         "csv_constant_value":2},
+                        {"tile_image_path":"../Map4/scorpions_hut/walls/cabin_wall_inside_left_top.png",
+                         "csv_constant_value":3},
+                        {"tile_image_path":"../Map4/scorpions_hut/walls/cabin_wall_inside_left_bottom_corner.png",
+                         "csv_constant_value":12} ,
+                       {"tile_image_path":"../Map4/scorpions_hut/walls/cabin_wall_inside_right.png",
+                         "csv_constant_value":4}  ]
+              }
+            ]
+}

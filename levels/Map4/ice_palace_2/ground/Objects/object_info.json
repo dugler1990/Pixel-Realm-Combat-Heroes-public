@@ -1,0 +1,15 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "../levels/Map4/ice_palace_2/ground/Objects/object_images/chest.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 14,
+            "y_pos": 5,
+            "obstruction_matrix": [
+    		[1]
+            ]
+    }
+  }
+]

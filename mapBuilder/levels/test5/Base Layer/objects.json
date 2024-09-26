@@ -1,0 +1,108 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "objects/healing_shrine_1.png",
+        "object_info": {
+            "width": 4,
+            "height": 4,
+            "x_pos": 15,
+            "y_pos": 20,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    0
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            ]
+        }
+    },
+    {
+        "id": "teepee_1",
+        "image_path": "objects/teepee_1.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 23,
+            "y_pos": 27,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info": [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        }
+    }
+]

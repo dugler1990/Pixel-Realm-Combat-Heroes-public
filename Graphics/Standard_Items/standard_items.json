@@ -1,0 +1,60 @@
+[
+    {
+        "item_id": "frost_potion",
+        "item_type": "consumable",
+        "spawn_type": "fixed",
+        "positions": [],
+        "image_path": "../levels/Map7/start/Items/frost_potion.png",
+        "effect": {"mana": 10},
+        "effect_type": "consumable"
+    },
+    {
+        "item_id": "ice_shard",
+        "item_type": "weapon",
+        "spawn_type": "fixed",
+        "positions": [],
+        "image_path": "../levels/Map7/start/Items/ice_shard.png",
+        "effect": {"other": 0},
+        "effect_type": "other"
+    },
+    {
+        "item_id": "frozen_fish",
+        "item_type": "consumable",
+        "spawn_type": "droppable",
+        "positions": [],
+        "image_path": "../Graphics/Standard_Items/frozen_fish.png",
+        "effect": {"health": 20},
+        "effect_type": "consumable",
+       "float_offset":0,
+       "float_speed":0.1,
+        "float_direction":1,
+        "float_amplitude":0.5
+    },
+    {
+        "item_id": "snowflake_charm",
+        "item_type": "equipable",
+        "spawn_type": "droppable",
+        "positions": [],
+        "image_path": "../Graphics/Standard_Items/snowflake_charm.png",
+        "effect": {"magic": 5},
+        "effect_type": "equipable"
+    },
+    {
+        "item_id": "arctic_feather",
+        "item_type": "equipable",
+        "spawn_type": "droppable",
+        "positions": [],
+        "image_path": "../Graphics/Standard_Items/arctic_feather.png",
+        "effect": {"speed": 3},
+        "effect_type": "equipable"
+    },
+    {
+        "item_id": "boss_key",
+        "item_type": "key",
+        "spawn_type": "droppable",
+        "positions": [],
+        "image_path": "../Graphics/Standard_Items/boss_key.png",
+        "effect": {},
+        "effect_type": "key"
+    }
+]

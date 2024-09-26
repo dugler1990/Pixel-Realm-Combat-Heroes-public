@@ -1,0 +1,14 @@
+{
+    "layouts": [
+        {
+            "name": "ba",
+            "csv_layout_path": "levels/test/ba/ba_csv.csv",
+            "tiles": [
+                {
+                    "tile_image_path": "levels/test/ba/tile_images/ice_ground_1.png",
+                    "csv_constant_value": 1
+                }
+            ]
+        }
+    ]
+}

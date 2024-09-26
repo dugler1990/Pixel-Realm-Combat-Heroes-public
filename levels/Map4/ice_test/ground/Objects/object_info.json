@@ -1,0 +1,27 @@
+[{"image_path":"../Map4/ice_test/ground/Objects/subzero_hut/cabin.png",
+ "object_info":{"width":3, 
+                "height":2,
+                "x_pos":10,
+                "y_pos":10,
+                "obstruction_matrix":[
+                                      [1,1,1],
+                                      [1,0,1]   
+                                      ],
+                
+                "trigger_info":{"destination_layout_path":"../Map4/scorpions_hut",
+                 "new_player_position":[4,4],
+                 "trigger_matrix":[
+                                      [0,0,0],
+                                      [0,0,1]
+                                  ]
+                               },
+                "spawn_area": true,
+                "spawn_matrix": [
+                                     [0, 1, 0],
+                                     [0, 1, 0]
+                                ],
+    "spawner_config_path": "../Map4/ice_test/ground/Objects/subzero_hut/spawner.json"
+
+                }
+}
+]

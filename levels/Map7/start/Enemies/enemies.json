@@ -1,0 +1,65 @@
+[
+ {
+    "type": "raccoon",
+    "positions": [
+        [6, 9],
+        [10,26]
+    ],
+    "persistent": false,
+    "can_follow": false,
+    "spawn_mode": "instant",
+    "attributes": {
+        "health": 30,
+        "exp": 300,
+        "damage": 40,
+        "attack_type": "claw",
+        "attack_sound": "../Audio/Attack/Claw.wav",
+        "speed": 2,
+        "resistance": 1,
+        "attack_radius": 120,
+        "notice_radius": 400
+    },
+    "item_drop_info": {
+        "guaranteed_drops": [
+            {"item_id": "boss_key", "quantity": 1}
+        ],
+        "random_drop_logic": "single",
+        "random_drop_list": [
+            {"chance": 0.5, "item_id": "frozen_fish"},
+            {"chance": 0.3, "item_id": "snowflake_charm"},
+            {"chance": 0.2, "item_id": "arctic_feather"}
+        ]
+    }
+},
+
+    
+    {
+        "type": "ice_mage",
+        "positions": [ [13, 10],
+        	       [13, 11],
+        	       [13, 12],
+        	       [13, 13],
+        	       [13, 14]],
+        "persistent": false,
+        "can_follow": false,
+        "spawn_mode": "instant",
+        "attributes": {
+            "health": 100,
+            "exp": 180,
+            "damage": 20,
+            "attack_type": "slash",
+            "speed": 3,
+            "resistance": 3,
+            "attack_radius": 80,
+            "notice_radius": 360,
+            "attack_sound": "../Audio/Attack/Slash.wav"
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+]

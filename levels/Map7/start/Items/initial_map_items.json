@@ -1,0 +1,41 @@
+[
+    {
+        "item_id": "frost_potion",
+       "item_type":"consumable",
+     "spawn_type":"fixed",  
+      "positions": [
+            [10, 15]
+        ],
+     "image_path":"../levels/Map7/start/Items/frost_potion.png",
+     "effect": {"mana":10},
+     "effect_type":"consumable"
+    },
+    {
+        "item_id": "ice_shard",
+        "item_type":"weapon",
+        "spawn_type":"fixed",
+        "positions": [
+            [15, 20]
+        ],
+     "image_path":"../levels/Map7/start/Items/ice_shard.png",
+     "effect":{"other":0},
+     "effect_type":"other"
+
+    },
+
+    {
+        "item_id": "frozen_fish",
+        "item_type":"item",
+        "spawn_type":"farmed_item",
+        "positions": [
+            
+        ],
+     "image_path":"../levels/Map7/start/Items/frozen_fish.png",
+     "effect":{"other":0},
+     "effect_type":"other",
+     "float_offset":0,
+     "float_speed": 0.2,
+     "float_direction":0.3
+
+}
+]

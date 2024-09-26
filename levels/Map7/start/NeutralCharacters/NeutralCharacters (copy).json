@@ -1,0 +1,37 @@
+[
+  {
+    "type": "eskimo",
+    "positions": [
+        [12, 15],
+        [7, 21]
+    ],
+    "attributes": {
+        "health": 100,
+        "name": "eskimo",
+        "interactable_tile_types": ["create_fishing_hole"]
+    }
+  },
+    {
+    "type": "polarbear",
+    "positions": [
+        [15, 15],
+        [2, 21],
+        [3, 21],
+        [22,15],
+        [23,15],
+        [24,15],
+        [25,15],
+        [26,15],
+        [22,20],
+        [23,20],
+        [24,12],
+        [25,12],
+        [26,24]
+    ],
+    "attributes": {
+        "health": 1000,
+        "name": "polarbear",
+        "interactable_tile_types": ["drink_water"]
+    }
+  }
+]

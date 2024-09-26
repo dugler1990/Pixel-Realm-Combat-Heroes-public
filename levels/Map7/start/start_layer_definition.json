@@ -1,0 +1,95 @@
+{
+    "layouts": [
+        {
+            "name": "start",
+            "csv_layout_path": "../levels/Map7/start/start_csv.csv",
+            "tiles": [
+                 {
+			                
+                
+                    "tile_image_path": "../levels/Map7/start/tile_images/grass.png",
+                    "csv_constant_value": 12
+                },
+                {
+			                
+                
+                    "tile_image_path": "../levels/Map7/start/tile_images/wood_1.png",
+                    "csv_constant_value": 1
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/snow_fluffy_2.png",
+                    "csv_constant_value": 2
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/ice_breaking_2.png",
+                    "csv_constant_value": 3
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/ice_breaking_1.png",
+                    "csv_constant_value": 4
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/snow_fluffy_3.png",
+                    "csv_constant_value": 5
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/water_basic.png",
+                    "csv_constant_value": 6,
+                    "type": "water",
+                    "valid_interaction_types":["drink_water"],
+                    "animation_config": {
+                        "mild_ripple_neutral": "../levels/Map7/start/tile_images/water/mild_ripple_neutral",
+                        "mild_ripple_left": "../levels/Map7/start/tile_images/water/mild_ripple_left",
+                        "mild_ripple_right": "../levels/Map7/start/tile_images/water/mild_ripple_right",
+                        "intense_ripple_left": "../levels/Map7/start/tile_images/water/intense_ripple_left",
+                        "intense_ripple_right": "../levels/Map7/start/tile_images/water/intense_ripple_right",
+                        "calm": "../levels/Map7/start/tile_images/water/calm"
+                    }
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/ice_ground_1.png",
+                    "csv_constant_value": 7,
+                    "valid_interaction_types":["create_fishing_hole"]
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/black.png",
+                    "csv_constant_value": 8
+                },
+                {
+                    "tile_image_path": "../levels/Map7/start/tile_images/snow_fluffy_1.png",
+                    "csv_constant_value": 9
+                }
+            ]
+        },
+        {
+            "name": "grass",
+            "csv_layout_path": "../levels/Map7/start/grass_csv.csv",
+            "tiles": [    
+                    
+                    {
+                
+                     "tile_image_path": "irrelevant",
+                     "csv_constant_value": 1,
+                     "type":"grass",
+                     "grass_options":[1,2,3,4,5],
+                     "grass_density":10
+                }
+        ]
+        },
+                {
+            "name": "grassBig",
+            "csv_layout_path": "../levels/Map7/start/grassBig_csv.csv",
+            "tiles": [    
+                    
+                    {
+                
+                     "tile_image_path": "irrelevant",
+                     "csv_constant_value": 1,
+                     "type":"grass_big",
+                     "grass_options":[6,7,8,9,10],
+                     "grass_density":10
+                }
+        ]
+        }
+    ]
+}

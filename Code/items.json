@@ -1,0 +1,62 @@
+{
+  "frost_potion": {
+    "image_path": "path/to/frost_potion.png",
+    "effect": {"health": 25, "frost_resistance": 10},
+    "type": "consumable",
+    "description": "Restores 25 health and increases frost resistance by 10 for a short duration."
+  },
+  "ice_shard": {
+    "image_path": "path/to/ice_shard.png",
+    "effect": {"attack": 5},
+    "type": "equipable",
+    "description": "A sharp shard of ice that increases attack power by 5 when equipped."
+  },
+  "glacial_heart": {
+    "image_path": "path/to/glacial_heart.png",
+    "effect": {"health": 100, "energy": 50},
+    "type": "rare",
+    "description": "A rare artifact that fully restores health and significantly boosts energy."
+  },
+  "snowflake_charm": {
+    "image_path": "path/to/snowflake_charm.png",
+    "effect": {"speed": 2},
+    "type": "equipable",
+    "description": "A delicate charm that increases movement speed by 2."
+  },
+  "polar_boots": {
+    "image_path": "path/to/polar_boots.png",
+    "effect": {"speed": 1, "frost_resistance": 5},
+    "type": "equipable",
+    "description": "Sturdy boots that provide additional speed and frost resistance."
+  },
+  "aurora_orb": {
+    "image_path": "path/to/aurora_orb.png",
+    "effect": {"magic": 10},
+    "type": "equipable",
+    "description": "An orb radiating with aurora energy, enhancing magical abilities."
+  },
+  "blizzard_scroll": {
+    "image_path": "path/to/blizzard_scroll.png",
+    "effect": {"use": "summon_blizzard"},
+    "type": "consumable",
+    "description": "A scroll that, when read, summons a powerful blizzard to damage enemies."
+  },
+  "frozen_fish": {
+    "image_path": "path/to/frozen_fish.png",
+    "effect": {"health": 10},
+    "type": "consumable",
+    "description": "A frozen fish that can be consumed for a small health boost."
+  },
+  "arctic_feather": {
+    "image_path": "path/to/arctic_feather.png",
+    "effect": {"agility": 3},
+    "type": "equipable",
+    "description": "A feather from an arctic bird, enhancing agility when carried."
+  },
+  "crystalized_snowglobe": {
+    "image_path": "path/to/crystalized_snowglobe.png",
+    "effect": {"magic_defense": 5},
+    "type": "equipable",
+    "description": "A snowglobe containing a magical crystal that provides defense against magical attacks."
+  }
+}

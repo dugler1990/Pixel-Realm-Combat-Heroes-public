@@ -1,0 +1,17 @@
+{"layouts":[ {"name":"jungle_image_layer",
+	       "layer_type":"scaled_objects",
+	       "scaled_objects":[
+	       {"image_path":"../levels/Map8/jungle_image_layer/Objects/object_images/jungle_map_1.png",
+	        "x_pos":0,
+	        "y_pos":0,
+	        "height":10,
+	        "width":12,
+	        "csv_definition_path":"../levels/Map8/jungle_image_layer/Objects/object_images/obstruction_csvs/jungle_map_1.csv",
+	        "tile_size_divisor": 8
+	       }
+	       
+	       
+	       ]
+             }
+           ]
+}

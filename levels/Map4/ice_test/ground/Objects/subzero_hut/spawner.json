@@ -1,0 +1,10 @@
+{ 
+  "enemy_spawn_weights":{
+      "squid":10,
+      "spirit":20,  
+      "raccoon":2
+      },
+  "spawn_type":"random_weights",
+  "frequency": 10000,
+  "spawn_limit": 0
+}

@@ -1,0 +1,10 @@
+{ 
+  "enemy_spawn_weights":{
+      "tribey_spear":5
+      },
+  "spawn_type":"random_weights",
+  "frequency": 10,
+  "spawn_number":3,
+  "spawn_limit": 200,
+  "next_spawn_time":10
+}

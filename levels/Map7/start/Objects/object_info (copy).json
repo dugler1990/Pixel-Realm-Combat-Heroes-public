@@ -1,0 +1,623 @@
+[
+    {
+        "id": "healing_shrine_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/healing_shrine_1.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 8,
+            "y_pos": 10,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]},
+                "spawn_area": true,
+                "spawn_matrix": [[
+                                     1,
+                                     0,
+                                     1
+                                    
+                                ]],
+    "spawner_config_path": "../levels/Map7/start/Objects/heal_spawner.json"
+            
+        }
+    },
+    {
+        "id": "healing_shrine_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/healing_shrine_1.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 8,
+            "y_pos": 10,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]},
+                "spawn_area": true,
+                "spawn_matrix": [[
+                                     1,
+                                     0,
+                                     1
+                                    
+                                ]],
+    "spawner_config_path": "../levels/Map7/start/Objects/heal_spawner.json"
+            
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/tree",
+        "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",
+        "object_info": {
+            "type":"tree",
+            "width": 1,
+            "height": 1,
+            "x_pos": 15,
+            "y_pos": 15,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/tree1/normal",
+                                       "strong_wind_left": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_left",
+                                       "strong_wind_right": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_right" },
+            "obstruction_matrix": [
+                [
+                    1
+                    
+                    
+                ],
+                [
+                    
+                    
+                    1
+                ],
+                [
+                    
+                    
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    
+                    
+                    0
+                ],
+                [
+                    
+                    
+                    0
+                ],
+                [
+                    
+                    
+                    0
+                ]
+            ]}                
+
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/house_hut_medium_finished",
+        "image_path": "../levels/Map7/start/Objects/object_images/house_hut_medium_finished.png",
+        "object_info": {
+            "width": 4,
+            "height": 4,
+            "x_pos": 13,
+            "y_pos": 6,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/tree",
+        "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",
+        "object_info": {
+            "type":"tree",
+            "width": 1,
+            "height": 1,
+            "x_pos": 14,
+            "y_pos": 15,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/tree1/normal",
+                                       "strong_wind_left": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_left",
+                                       "strong_wind_right": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_right" },
+            "obstruction_matrix": [
+                [1],
+                [1],
+                [1]
+            ]}                
+
+        },
+        {
+        "id": "../levels/Map7/start/Objects/object_images/tree",
+        "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",
+        "object_info": {
+            "type":"tree",
+            "width": 1,
+            "height": 1,
+            "x_pos": 15,
+            "y_pos": 14,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/tree1/normal",
+                                       "strong_wind_left": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_left",
+                                       "strong_wind_right": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_right" },
+            "obstruction_matrix": [
+                [1],
+                [1],
+                [1]
+            ]}                
+
+        },
+        {
+        "id": "../levels/Map7/start/Objects/object_images/tree",
+        "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",
+        "object_info": {
+            "type":"tree",
+            "width": 1,
+            "height": 1,
+            "x_pos": 14,
+            "y_pos": 14,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/tree1/normal",
+                                       "strong_wind_left": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_left",
+                                       "strong_wind_right": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_right" },
+            "obstruction_matrix": [
+                [1],
+                [1],
+                [1]
+            ]}                
+
+        },
+        {
+        "id": "../levels/Map7/start/Objects/object_images/tree",
+        "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",
+        "object_info": {
+            "type":"tree",
+            "width": 1,
+            "height": 1,
+            "x_pos": 13,
+            "y_pos": 14,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/tree1/normal",
+                                       "strong_wind_left": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_left",
+                                       "strong_wind_right": "../levels/Map7/start/Objects/object_images/tree1/strong_wind_right" },
+            "obstruction_matrix": [
+                [1],
+                [1],
+                [1]
+            ]}                
+
+        },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/house_hut_medium_finished",
+        "image_path": "../levels/Map7/start/Objects/object_images/house_hut_medium_finished.png",
+        "object_info": {
+            "width": 4,
+            "height": 4,
+            "x_pos": 13,
+            "y_pos": 6,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/teepee_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/teepee_1.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 12,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 2,
+            "height": 2,
+            "x_pos": 21,
+            "y_pos": 11,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 23,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 24,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 25,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "../levels/Map7/start/Objects/object_images/ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 26,
+            "y_pos": 12,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 20,
+            "y_pos": 11,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "ice_obstruction_1",
+        "image_path": "../levels/Map7/start/Objects/object_images/ice_obstruction_1.png",
+        "object_info": {
+            "width": 1,
+            "height": 1,
+            "x_pos": 19,
+            "y_pos": 11,
+            "obstruction_matrix": [
+                [
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0
+                ]
+            ]}
+        }
+    },
+    {
+        "id": "build_home_stage_2",
+        "image_path": "../levels/Map7/start/Objects/object_images/build_home_stage_2.png",
+        "object_info": {
+            "width": 3,
+            "height": 3,
+            "x_pos": 20,
+            "y_pos": 5,
+            "obstruction_matrix": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    1
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix":[
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
+            ]}
+        }
+    }
+]

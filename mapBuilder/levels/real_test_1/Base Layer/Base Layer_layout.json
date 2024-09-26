@@ -1,0 +1,46 @@
+{
+    "layouts": [
+        {
+            "name": "Base Layer",
+            "csv_layout_path": "levels/real_test_1/Base Layer/Base Layer_csv.csv",
+            "tiles": [
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/water_basic.png",
+                    "csv_constant_value": 1
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/ice_breaking_1.png",
+                    "csv_constant_value": 2
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/snow_fluffy_1.png",
+                    "csv_constant_value": 3
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/black.png",
+                    "csv_constant_value": 4
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/snow_fluffy_3.png",
+                    "csv_constant_value": 5
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/wood_1.png",
+                    "csv_constant_value": 6
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/snow_fluffy_2.png",
+                    "csv_constant_value": 7
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/ice_breaking_2.png",
+                    "csv_constant_value": 8
+                },
+                {
+                    "tile_image_path": "levels/real_test_1/Base Layer/tile_images/ice_ground_1.png",
+                    "csv_constant_value": 9
+                }
+            ]
+        }
+    ]
+}

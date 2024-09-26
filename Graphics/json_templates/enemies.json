@@ -1,0 +1,77 @@
+[
+    {
+        "type": "squid",
+        "positions": [[100, 200], [150, 250], [200, 300]],
+        "persistent": false,
+        "can_follow": false,
+        "spawn_mode": "instant",
+        "attributes": {
+            "health": 100,
+            "exp": 180,
+            "damage": 20,
+            "attack_type": "slash",
+            "speed": 3,
+            "resistance": 3,
+            "attack_radius": 80,
+            "notice_radius": 360,
+            "attack_sound": "../Audio/Attack/Slash.wav"
+        }
+    },
+    {
+        "type": "raccoon",
+        "positions": [[300, 400], [350, 450], [400, 500]],
+        "persistent": true,
+        "can_follow": true,
+        "spawn_mode": "timed",
+        "spawn_interval": 30000,  // 30 seconds
+        "attributes": {
+            "health": 300,
+            "exp": 300,
+            "damage": 40,
+            "attack_type": "claw",
+            "speed": 2,
+            "resistance": 3,
+            "attack_radius": 120,
+            "notice_radius": 400,
+            "attack_sound": "../Audio/Attack/Claw.wav"
+        }
+    },
+    {
+        "type": "spirit",
+        "positions": [[500, 600], [550, 650], [600, 700]],
+        "persistent": false,
+        "can_follow": false,
+        "spawn_mode": "random",
+        "spawn_chance": 0.05,  // 5% chance to spawn per check
+        "attributes": {
+            "health": 100,
+            "exp": 200,
+            "damage": 8,
+            "attack_type": "thunder",
+            "speed": 4,
+            "resistance": 3,
+            "attack_radius": 60,
+            "notice_radius": 350,
+            "attack_sound": "../Audio/Attack/Fireball.wav"
+        }
+    },
+    {
+        "type": "bamboo",
+        "positions": [[700, 800], [750, 850], [800, 900]],
+        "persistent": true,
+        "can_follow": false,
+        "spawn_mode": "timed",
+        "spawn_interval": 20000,  // 20 seconds
+        "attributes": {
+            "health": 70,
+            "exp": 150,
+            "damage": 6,
+            "attack_type": "leaf_attack",
+            "speed": 3,
+            "resistance": 3,
+            "attack_radius": 50,
+            "notice_radius": 300,
+            "attack_sound": "../Audio/Attack/Slash.wav"
+        }
+    }
+]

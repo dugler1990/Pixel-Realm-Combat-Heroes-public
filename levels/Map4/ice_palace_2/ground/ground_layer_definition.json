@@ -1,0 +1,17 @@
+{"layouts":[ {"name":"ground",
+	       "layer_type":"scaled_objects",
+	       "scaled_objects":[
+	       {"image_path":"../levels/Map4/ice_palace_2/ground/Objects/object_images/inside_ice_palace.png",
+	        "x_pos":5,
+	        "y_pos":3,
+	        "height":20,
+	        "width":14,
+	        "csv_definition_path":"../levels/Map4/ice_palace_2/ground/Objects/object_images/obstruction_csvs/inside_ice_palace.csv",
+	        "tile_size_divisor": 8
+	       }
+	       
+	       
+	       ]
+             }
+           ]
+}
