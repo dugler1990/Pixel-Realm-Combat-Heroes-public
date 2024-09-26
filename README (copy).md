@@ -1,12 +1,19 @@
 # Pixel-Realm:Combat Heroes
 A Zelda-like game I made with Python inspired by this repo:  https://github.com/Spyder-0/Zelda-with-Python <br />
 
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/bossfight.gif" width="600" /> <br />
+
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/bossfight.gif) <br />
+
+
 
 # Goal
 The goal of the game is to kill many monsters and get EXP to upgrade your skills! If your health runs out, the game will close automatically, so DON'T DIE! Goodluck! Also, this code is not a full game, its just a nice project to pass time.<br />
 
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/startmenugif.gif" width="600" /> <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/startmenugif.gif) <br />
+
+
+
+
 
 # Controls
 WASD - Move <br />
@@ -20,8 +27,12 @@ M - Toggle Upgrade Menu <br />
 I - Toggle inventory <br />
 Alt+Q - Toggle skills settings - unfinished <br />
 
+
+
 # Level up 
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/levelup.gif" width="600" /> <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/levelup.gif) <br />
+
+
 
 # Magic
 -Flame <br />
@@ -29,14 +40,14 @@ Alt+Q - Toggle skills settings - unfinished <br />
 -iceball <br />
 
 # Evasion
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/snakefight.gif" width="600" /> <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/snakefight.gif) <br />
 
 -slide <br />
 -ice clone <br />
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/ice%20clone.gif" width="600" /> <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/ice%20clone.gif) <br />
 
 # Enemies
-<img src="https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower%20fight.gif" width="600" /> <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower%20fight.gif) <br />
 -<br />
 -<br />
 -<br />
@@ -46,6 +57,7 @@ Alt+Q - Toggle skills settings - unfinished <br />
 -Polarbears <br />
 
 # Environment
+
 -Day time <br />
 - rain/snow <br />
 - grass
@@ -63,4 +75,3 @@ Timer, level counter
 
 # Open Source
 This project is open source! You can use it and modify it, but make sure to give credit to the creator of the tutorial :)
-
