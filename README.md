@@ -7,7 +7,7 @@ A Zelda-like game I made with Python inspired by this repo:  https://github.com/
 
 
 # Goal
-The goal of the game is to kill many monsters and get EXP to upgrade your skills! If your health runs out, the game will close automatically, so DON'T DIE! Goodluck! Also, this code is not a full game, its just a nice project to pass time. It shows how powerful Python really is! <br />
+The goal of the game is to kill many monsters and get EXP to upgrade your skills! If your health runs out, the game will close automatically, so DON'T DIE! Goodluck! Also, this code is not a full game, its just a nice project to pass time.<br />
 
 ![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/startmenugif.gif) <br />
 
