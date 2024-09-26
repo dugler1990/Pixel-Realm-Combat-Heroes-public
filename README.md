@@ -1,15 +1,15 @@
 # Pixel-Realm:Combat Heroes
-A Zelda-like game I made with Python inspired by this repo:  https://github.com/Spyder-0/Zelda-with-Python
+A Zelda-like game I made with Python inspired by this repo:  https://github.com/Spyder-0/Zelda-with-Python <br />
 
 
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/boss_fight.gif)  
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/bossfight.gif) <br />
 
 
 
 # Goal
-The goal of the game is to kill many monsters and get EXP to upgrade your skills! If your health runs out, the game will close automatically, so DON'T DIE! Goodluck! Also, this code is not a full game, its just a nice project to pass time. It shows how powerful Python really is!
+The goal of the game is to kill many monsters and get EXP to upgrade your skills! If your health runs out, the game will close automatically, so DON'T DIE! Goodluck! Also, this code is not a full game, its just a nice project to pass time. It shows how powerful Python really is! <br />
 
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/startmenugif.gif)  
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/startmenugif.gif) <br />
 
 
 
@@ -19,38 +19,42 @@ The goal of the game is to kill many monsters and get EXP to upgrade your skills
 WASD - Move <br />
 Space - Attack <br />
 Left Control - Magic <br />
-C - Evasion
+C - Evasion <br />
 
 E - Change Magic <br />
 R - Change Evasion <br />
 M - Toggle Upgrade Menu <br />
 I - Toggle inventory <br />
-Alt+Q - Toggle skills settings - unfinished
+Alt+Q - Toggle skills settings - unfinished <br />
 
 
 
 # Level up 
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/levelup.gif)  
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/levelup.gif) <br />
 
 
 
 # Magic
--Flame
--Heal
--iceball
+-Flame <br />
+-Heal <br />
+-iceball <br />
 
 # Evasion
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/snake_fight.gif)  
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/snakefight.gif) <br />
 
--slide
--ice clone
+-slide <br />
+-ice clone <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/ice clone.gif) <br />
 
 # Enemies
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower_fight.gif)  
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower fight.gif) <br />
+-<br />
+-<br />
+-<br />
 
 # Neutral
--Eskimos
--Polarbears
+-Eskimos <br />
+-Polarbears <br />
 
 # Environment
 
