@@ -44,10 +44,10 @@ Alt+Q - Toggle skills settings - unfinished <br />
 
 -slide <br />
 -ice clone <br />
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/ice clone.gif) <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/ice%20clone.gif) <br />
 
 # Enemies
-![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower fight.gif) <br />
+![Gameplay Demo](https://raw.githubusercontent.com/dugler1990/Pixel-Realm-Combat-Heroes-public/main/repo_assets/flower%20fight.gif) <br />
 -<br />
 -<br />
 -<br />
@@ -58,11 +58,16 @@ Alt+Q - Toggle skills settings - unfinished <br />
 
 # Environment
 
+-Day time <br />
+- rain/snow <br />
+- grass
+
 # UI
 Red Bar: Health <br />
 Blue Bar: Energy (Will decrease every time you use magic and recharges after a while) <br />
 Two Boxes on the Bottom Left: Weapon and Magic Selection <br />
 Bottom Right Box: EXP <br />
+Timer, level counter
 
 # Python and Pygame 🐍
 **Python:** https://www.python.org/downloads/ <br />
