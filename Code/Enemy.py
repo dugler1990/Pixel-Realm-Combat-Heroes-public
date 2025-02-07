@@ -520,7 +520,7 @@ class Enemy(Entity):
     def get_damage(self, player, attack_type):
         if self.vulnerable:
             self.hit_sound.play()
-            self.direction = self.get_player_distance_direction(player)[1]
+            self.direction = self.get_player_distance_direction(player)[1] # Faces you when hit ? not sure about this
             if attack_type == "weapon":
                 self.health -= player.get_full_weapon_damage()
             else:

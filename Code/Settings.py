@@ -171,7 +171,7 @@ monster_data = {
         "combat_config":{
         "melee_attack_radius": 50,
         "notice_radius": 2500,
-        "melee_attacks": [{"damage": 6, "cooldown": 1000}],
+        "melee_attacks": [{"damage": 20, "cooldown": 1000}],
         "ranged_attacks": [],
         "melee_parry_chance": 0.0,
         "projectile_parry_chance": 0.0,

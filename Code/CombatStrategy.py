@@ -137,10 +137,14 @@ class MeleeCombatStrategy(CombatStrategy):
             enemy.attack_time = current_time
 
             if enemy.current_attack_type == "melee":
+                
+                # colision for enemy attack without distance
+                
                 distance_to_player = Vector2(enemy.rect.center).distance_to(player.rect.center)
                 if distance_to_player <= enemy.combat_config["melee_attack_radius"]:
                     attack = random.choice(self.melee_attacks)
-                    self.combat_context["damage_player"](attack['damage'], "melee")
+                    #self.combat_context["damage_player"](attack['damage'], "melee")
+                    player.get_damage( attack['damage'],"melee" )  
                     enemy.attack_sound.play()
                     enemy.attack_cooldown = attack['cooldown']
                     enemy.direction = Vector2(0, 0) 
@@ -304,7 +308,8 @@ class MixedCombatStrategy(CombatStrategy):
                 if distance_to_player <= enemy.combat_config["melee_attack_radius"]:
                     
                     attack = random.choice(self.melee_attacks)
-                    self.combat_context["damage_player"](attack['damage'], "melee")
+                    #self.combat_context["damage_player"](attack['damage'], "melee")
+                    player.get_damage( attack['damage'],"melee" ) 
                     enemy.attack_sound.play()
                     enemy.attack_cooldown = attack['cooldown']
 

@@ -120,7 +120,7 @@ class Spawner:
                         
                         # update number of spawned items by config
                         if area["config"]["scale_type"] == "multiple":
-                            area['config']["spawn_number"] *= 2
+                            area['config']["spawn_number"] = min( area['config']["spawn_number"] * 2, area["config"]["scale_max"] )
                             #print("spawn number")
                             #print(area['config']["spawn_number"])
             
@@ -156,9 +156,15 @@ class Spawner:
                 #print("enemies")
                 #print(self.enemies)
                 
+                
+                #print( f" number enemier : {len(self.enemies)}, spawn limit : { config['spawn_limit']} " )
                 if len(self.enemies) < config['spawn_limit']:
+                    n_enemies_from_spawner = len(self.enemies)
+                    number_new_sprites = config["spawn_number"]
+                    if  n_enemies_from_spawner + config["spawn_number"] > config['spawn_limit']  :
+                        number_new_sprites = config['spawn_limit'] - n_enemies_from_spawner
                     
-                    for i in range(config['spawn_number']):
+                    for i in range(number_new_sprites):
                         spawn_pos = self.choose_random_spawn_pos(area['matrix'], area['object_info'])
                         if spawn_pos:
                             chosen_enemy = self.choose_enemy_based_on_weights(config['enemy_spawn_weights'])

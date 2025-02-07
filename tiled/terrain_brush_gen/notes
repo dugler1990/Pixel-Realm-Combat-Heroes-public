@@ -1,0 +1,85 @@
+texture notes : 
+
+1. the inner corners need to be more rounded, you can see examples
+2. the circle needs to be slightly smaller - you can see how its too big by a factor
+3. need to add the spray at the borders.
+4. need to add objects.
+
+
+
+----- I need to be mroe precise about the distances i am using , everything is jarry.
+
+
+
+
+
+ok so lets focus on this example, this is a left facing T
+
+x > tile_size // 2 or (y > tile_size // 4 and y < 3 * tile_size // 4)
+
+what this means is, cover the right half of the mask, and also if the left half is inbetween 25 and 75%  cover this too.
+
+what we need is to NOT cut out the curve
+
+if we have 
+
+X X X X
+X X X X
+X X X X
+X X X X
+
+we are currently doing
+
+0 ! X X 
+X X X X 
+X X X X 
+0 ! X X
+
+we need to not eliminate the
+exclams but eliminate a curve shape in there instead.
+
+so we just fill 75% as opposed to 50% first, then we draw a circle of radius 25% tilesize with center at top + 25% from the left
+
+
+
+
+Two thirds one 1 third another is actually the edge set, totally neccessary to have both, still not sure why the diagonals are not working
+
+need the single tile with 4 corners, need the inner larger circle in 4 tiles for both ( atm just have single corner tile, not the 3 corner tiles
+
+
+I think all the inverse stuff is confusing it, possibly the different tiles in the center of the square matters... maybe it gets confused because every connecting tile is the same... i dno.
+
+does some wierd shit, but not what you want...
+
+
+ok, works, pretty fkn awsome, issue was with edge tiles.
+
+
+
+
+now i need to 
+
+1. scale the objects
+2. draw some objects
+3. draw obstructions
+4. connect to game.   ----> gota import using pytmx and then use this to define game, seems like best option.
+
+----------------------------> plan transition to .tmx, i will start a new branch.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

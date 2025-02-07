@@ -44,8 +44,8 @@ class AnimatedEnvironmentSprite(pygame.sprite.Sprite):
         self.update_animations_with_weather(weather)
         now = pygame.time.get_ticks()
         
-        #print(f"ANIMATION SPEED : {self.animation_speed}")
-        #print(f" frame_index : frame index {self.frame_index} , len {len(self.frames)}")
+        print(f"ANIMATION SPEED : {self.animation_speed}")
+        print(f" frame_index : frame index {self.frame_index} , len {len(self.frames)}")
         if now - self.last_update > self.animation_speed:
             self.frame_index = (self.frame_index + 1) % len(self.frames)
             self.image = self.frames[self.frame_index]

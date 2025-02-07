@@ -2,6 +2,262 @@
 
 
 
+BUGS:
+
+1.demon_dog runs away from player indefinately ( meant to have evasive movement up untill a limit ) 
+2. momentary lag when spawning large number of creatures at once ( should just shedule it and not have them all happen at once, have them come out one by one after each other ) 
+
+
+
+LIMITS:
+1. at the moment having grass 
+   - water, trees
+   ~10 animated environ sprites
+   
+   ~3 bosses
+   ~ 70 regular enemies
+
+works fine.
+
+
+Spawners cap does not seem to be working, still 300 spawned.
+
+---> done some work, i thought i had set a limit PER spawner, it seems that i always check the global enemies actually,
+     this could be ok.... i just wanted hut spawns to keep happenining even when there is a very quick exponential spawner next to it, suddenyl spawns 100 snakes
+     
+     Yes - THOUGHT WORK : what should i do ? have a global count and a count per spawner ? do i already have one ? 
+     
+     
+     
+
+Player seems to be too bouncy on walls
+
+Quick wins : 
+
+-torches that emit light in caves etc
+
+----1. create animated sprite     DONE
+    2. define luminosity          Kinda done, brightness overlaps not working correctly.
+                                  Pretty much done, could adapt the actual brightness levels and circles is kinda whack.
+    	-> Reuse the lighting on the player, this is currently controlled by weather, right ? 
+    	
+    	---> Maybe use this TODO: https://github.com/LuckeyDuckey/Pygame_Lighting_Engine
+    	
+    
+    TODO: make a more comprehensive brightness system.
+    
+    3. create torch weapon
+
+
+- Summons, new monsters (gifs)
+
+	-> Plan to create summons : 
+	
+		create magic attack
+		   - needs cooldown and summoning time
+		   - needs to spawn friendly
+		   	- level function "spawn enemy" should be passed to player
+		   
+		   - need to create friendly.py
+		   	--- friendly needs to attack enemies that come in certain range,
+		   	    if player gets certain distance from them, respawns near player
+		   	    
+		   	    ** damage player is kind of an issue, for all current combat strategy, doing damage directly implements the damage player function
+		   	       when the friendly uses a combat strategy, it must damage an enemy. It should do this like the player does.
+		   	    
+		   	    
+	Issues : still a bit confused as to how the "combat context" i.e. the spawn enemy method and fire projectile methods are passed to the combat strategy and used. 
+	         I need the player to get this method, maybe i can forget about thi for now and just pass the level.spawner.create_friendly method.
+	         
+	         for the same combat strategy to work, i should not use enemy and player in the combat strategies , but self and victim, this would mean that i have a generic
+	         damage entity dunction as opposed to the damage player and -- checking-- in the case of the player, we have player attack logic that checks attackable sprites attacks
+	         have collided with and then uses the enemy.get_damage. the player should have get_damage , right ? i need to refactor here.
+	         
+	         we also need to allow enemies to not just attack player but also attack friendlies. This itself assumes its from player.
+	         
+	         I need to re think a totally general way that they can take and recieve damage, maybbe first they all inherit from attacking_entity and hittable_entity .
+	         
+	         PLAN:
+	         
+	         combat strategy needs to recieve hitter hitted, create interface for hittable_entity, this implies get_damage, hit_reaction,
+	         this way in combat strategy i can call hitted.get_damage(), get player distance and direction should be changed to get enemy distance and direction
+	         this should be the closest friendly_sprite -> i need to create this group of sprites, to add player and all friendlies. At the moment we have attackable_sprites
+	         as a group, this contains neutrals and enemies at the moment, we should also just have firndly_sprites, enemies should go after the closest one of these.
+	         
+	         steps:
+	         
+	         1. make player get hit with his own get_damage function ( check that it works ok ) 
+	         
+	         	atm combat context get this from level.
+	         	
+	         	--unclear how fire_projectile damages player.
+	         	---> its in the enemy_projectile_logic() func in the level. it seems that any enemy projectile damages for 10 for every frame, regardless
+	         	                                                            we need to parameterize this too.
+	         	                                                            
+	         	                                                            -> i guess this should be defined in the particle itself ?
+	         	                                                            
+	         	                                                            -> we need projectiles to have the ability to damage anyone, 
+	         	                                                               or anyone on your team, currently, its just player that recieves a fixed amount
+	         	                                                               of damage from a projectile.
+	         	                                                               
+	         	                                                             1.1 fixes:
+	         	                                                             -> i need any friendly units to be checked for collision with enemy_attack_sprites.
+	         	                                                             -> if the attack sprites have "friendly fire" they should check with each other too.
+	         	                                                             
+	         	                                                             ---->* How do my projectiles interact with enemies ? this logic should be unified.
+	         	                                                             
+	         	                                                             -----> atm i just do it in player_attack_logic, this should also have friendly 
+	         	                                                                    fire option
+	         	                                                                    
+	         	                                                             ** we are creating attack_sprites and enemy_attack_sprites, we should unify this
+	         	                                                                and make it work based on team or something.
+	         	                                                                
+	         	                                                                
+	         	                                                             *** Another issue to unify all of this, we have melee just executing when you are in range
+	         	                                                                 and imediately giving damage, we should create an attack sprite that you can dodge.
+	         	                                                                 
+	         	                                                             PLAN: 
+	         	                                                             unify attack sprite logic and collisions, any attack creates an attack sprite.
+	         	                                                             
+	         	                                                             so lets try to remove the enemy attack sprites vs normal attack sprites, remove the 
+	         	                                                             enemy projectil logic, the player attack logic we replaceit for process attack collisions
+	         	                                                             -> this checks all of the attack sprites (attack sprites will have denoted who they can damage)
+	         	                                                             
+	         	                                                             
+	         	                                                             
+	         	                                                             
+	         	                                                             
+	         	                                                             
+	         	                                                                 
+	         	                                                                
+	         	                                                               
+	         
+	         2. create hittable_entity interface -> pass it to neutral, enemy, player
+	         
+	         ---> just get damage func , right  ? 
+	         ---> first just do it for player.
+	         
+	         		Lets make it a bit more general, atm, enemies take magic of melee damage from hero throught the method player.get_full_weapon_damage or
+	         		                                                                                                             .get_full_magic_damage.
+	         		                                                                                                             
+	         		                                                                                             just as we have hittable, we should have
+	         		                                                                                             hitter and caster ?
+	         		                                                                                             
+	         		                                                                                             simplest is hitter
+	         		                                                                                             
+	         		                                                                                             -> for the player we set self.weapon and
+	         		                                                                                                                      self.magic
+	         		                                                                                                this is then checked in a general
+	         		                                                                                                weapon_data 
+	         		                                                                                                and 
+	         		                                                                                                magic_data dict.
+	         		                                                                                                
+	         		                                                                                              ew can make this general, 
+	         		                                                                                              what we do is make the possibility to 
+	         		                                                                                              have no weapon (i.e. entry for None 
+	         		                                                                                                                   in the weapons and magic dict. )
+	         		                                                                                                                   
+	         		                                                                                              I also need to give all attacking sprites 
+	         		                                                                                              self.weapon or self.magic in particular
+	         		                                                                                              these must exist in the dicts.
+	         		                                                                                              
+	         		                                                                                              they are also just bonus damage, the enemy's themselvs
+	         		                                                                                              dont necessarily have self.stats["attack"]
+
+                                                                                                                              and self.stats["magic"] like player. 
+                                                                                                                              
+                                                                                                                              ***--> i do know , that some sprites already have
+                                                                                                                                     special magic attacks. I guess the damage is being 
+                                                                                                                                     determined in a similar fassion ? 
+                                                                                                                                     
+                                                                                                                                     
+                                                                                                                               WL: Check this.	    
+                                                                                                                               	if he has ranged combat strat he hises
+                                                                                                                               	
+                                                                                                                               	fire_projectile from level4, this is only used for enemies
+                                                                                                                               	atm. 
+                                                                                                                               	
+                                                                                                                               	the animation player.create_particles created the projectile
+                                                                                                                               	we then check with enemy_projectile_logic
+                                                                                                                               	for collisions and do a starndard 10 damage per frame for 
+                                                                                                                               	enemy projectiles. It calls damage_player.
+                                                                                                                               	
+                                                                                                                               	so we are talking i guess about the entity itself having a 
+                                                                                                                               	self.take_damage function. 
+                                                                                                                               	
+                                                                                                                               	in each case, 
+                                                                                                                               	
+                                                                                                                               	enemy projectile logic is fine, except its the proejctil that 
+                                                                                                                               	has damage player, we just take what ever it is colliding with
+                                                                                                                               	and self.damage that. 
+                                                                                                                               	
+                                                                                                                               	hmm ok so we are saying we want to unify projectile collisions too ? 
+                                                                                                                               	
+                                                                                                                               	player projectile damagin enemy does not have a player_projectile_logic
+                                                                                                                               	its just in the player attack logic.
+                                                                                                                               	
+                                                                                                                               	
+                                                                                                                               	so in current paradigm it would be friendly_attack_logic
+                                                                                                                               	enemy_attack_logic
+                                                                                                                               	
+                                                                                                                               	i would want to include enemy melee in this too. 
+                                                                                                                               	-> enemy mellee is -> it looks like mellee could be done in the enemy_
+                                                                                                                               	projectil_logic too..... i dont think it is tho.
+                                                                                                                               	
+                                                                                                                               	the way melle attacks are done is directly damaging in the combat strategy
+                                                                                                                               	i guess i should separate this and create an enemy attack sprite to 
+                                                                                                                               	see if a friendly is colliding with it in the friendly_attack_logic
+                                                                                                                               	I should really cal it friendly damage evaluation and 
+                                                                                                                               	enemy_damage evaluation. 
+                                                                                                                               	
+                                                                                                                               	More broadly, i should do it "per team" it could be a single function
+                                                                                                                               	that iterates over the number of teams and who they can damage.
+                                                                                                                               	
+                                                                                                                               	this is nice and clean, i will do this.
+                                                                                                                               	
+                                                                                                                               	     
+	         
+	         3. make the sprite group for friendly_sprites
+	            -> add player to friendly_sprites
+	            -> write enemy code to check closest friendly sprite ( pass friendly sprite group to enemies ) 
+	         4. adapt combat strategy to take attacker, victim
+	         5. actions should check distance to player, if beyond max_distance, he should teleport next to player
+	                                                     if in middle threshold should start running back
+	         6. create spawn friendly method for spawner, it just calls friendly with same params , as opposed to enemy.
+	         7. create new magic for player that is passed spawner to spawn friendly
+		   	    
+
+
+-build towers
+- keep creating maps...
+
+
+Harder wins: 
+
+- Issue with quadtree, written in code, want to remove more efficiently.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 tasks : 
 
  1.Display timer  Done
@@ -320,6 +576,11 @@ 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
 new : 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
 new2: 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
 
+git remote set-url origin https://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@github.com/dugler1990/IceCoreTempModelling.git
+
+
+
+git remote add origin https://github.com/dugler1990/IceCoreTempModelling.git
 
 What would be the minimal version of this ? 
 

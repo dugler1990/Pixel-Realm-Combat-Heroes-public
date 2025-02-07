@@ -111,6 +111,146 @@
             
         }
     },
+       {
+        "id": "../levels/Map7/start/Objects/object_images/torch1",
+        "image_path": "../levels/Map7/start/Objects/object_images/torch1/normal/0.png",
+        "object_info": {
+            "type":"torch",
+            "width": 1,
+            "height": 1,
+            "x_pos": 10,
+            "y_pos": 12,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/torch1/normal" },
+            "obstruction_matrix": [
+                [
+                    1
+                  
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0
+                ]
+            ]}                
+
+        }
+    },
+           {
+        "id": "../levels/Map7/start/Objects/object_images/torch1",
+        "image_path": "../levels/Map7/start/Objects/object_images/torch1/normal/0.png",
+        "object_info": {
+            "type":"torch",
+            "width": 1,
+            "height": 1,
+            "x_pos": 10,
+            "y_pos":18,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/torch1/normal" },
+            "obstruction_matrix": [
+                [
+                    1
+                  
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0
+                ]
+            ]}                
+
+        }
+    },
+           {
+        "id": "../levels/Map7/start/Objects/object_images/torch1",
+        "image_path": "../levels/Map7/start/Objects/object_images/torch1/normal/0.png",
+        "object_info": {
+            "type":"torch",
+            "width": 1,
+            "height": 1,
+            "x_pos": 7,
+            "y_pos": 24,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/torch1/normal" },
+            "obstruction_matrix": [
+                [
+                    1
+                  
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0
+                ]
+            ]}                
+
+        }
+    },
+    
+             {
+        "id": "../levels/Map7/start/Objects/object_images/torch1",
+        "image_path": "../levels/Map7/start/Objects/object_images/torch1/normal/0.png",
+        "object_info": {
+            "type":"torch",
+            "width": 1,
+            "height": 1,
+            "x_pos": 7,
+            "y_pos": 32,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/torch1/normal" },
+            "obstruction_matrix": [
+                [
+                    1
+                  
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0
+                ]
+            ]}                
+
+        }
+    },
+    
+    
+             {
+        "id": "../levels/Map7/start/Objects/object_images/torch1",
+        "image_path": "../levels/Map7/start/Objects/object_images/torch1/normal/0.png",
+        "object_info": {
+            "type":"torch",
+            "width": 1,
+            "height": 1,
+            "x_pos": 10,
+            "y_pos": 33,
+            "sprite_animation_config":{"normal": "../levels/Map7/start/Objects/object_images/torch1/normal" },
+            "obstruction_matrix": [
+                [
+                    1
+                  
+                ]
+            ],
+            "trigger_info":{ 
+               "destination_layout_path":"/",
+               "new_player_position" : [4,4],
+               "trigger_matrix": [
+                [
+                    0
+                ]
+            ]}                
+
+        }
+    },
+    
+    
     {
         "id": "../levels/Map7/start/Objects/object_images/tree",
         "image_path": "../levels/Map7/start/Objects/object_images/tree1.png",

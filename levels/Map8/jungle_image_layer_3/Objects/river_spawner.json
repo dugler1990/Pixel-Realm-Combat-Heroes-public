@@ -5,9 +5,10 @@
   "spawn_type":"random_weights",
   "frequency": 10,
   "spawn_number":1,
-  "spawn_limit": 80,
+  "spawn_limit": 120,
   "next_spawn_time":10,
   "time_scaled":true,
   "scale_type": "multiple",
-  "scale_factor":2
+  "scale_factor":2,
+  "scale_max": 40
 }

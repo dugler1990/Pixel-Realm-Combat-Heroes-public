@@ -26,6 +26,7 @@ import random
 from AnimationSprite import AnimationSprite
 from Trap import Trap
 from Tree import Tree 
+from Torch import Torch
 from Weather import Weather
 from AnimatedEnvironmentSprite import AnimatedEnvironmentSprite
 from WaterTile import WaterTile
@@ -36,6 +37,8 @@ from GrassManager import GrassManager
 from QuadTree import QuadTree
 from QuadTree import QuadTreeManager
 from QuadTreeItem import QuadTreeItem
+from pygame.math import Vector2
+from pygame.mask import from_surface  
 
 from hashRect import HashableRect
 from Entity import Entity
@@ -44,6 +47,65 @@ from Entity import Entity
 #triggers = json.loads(file.read())
 
 
+#### Imports to move  : 
+
+
+
+class BrightnessCircle:
+    def __init__(self, center, radius, brightness):
+        self.center = center
+        self.radius = radius
+        self.brightness = brightness
+    
+    def intersects(self, other_circle):
+        """Check if two circles overlap by comparing distances between centers and their radii."""
+        distance = Vector2(self.center).distance_to(other_circle.center)
+        return distance < (self.radius + other_circle.radius)
+
+    def get_surface(self, size):
+        """Create a surface for this circle's brightness."""
+        surface = pygame.Surface(size, pygame.SRCALPHA)
+        brightness_color = (255 * self.brightness, 255 * self.brightness, 255 * self.brightness, 255)
+        pygame.draw.circle(surface, brightness_color, self.center, self.radius)
+        return surface
+
+
+def draw_circle_with_max_brightness(surface, circle, max_brightness_mask, mask_pos):
+    """Draws the circle on the surface with max brightness in overlapping areas."""
+    brightness_color = (255 * circle.brightness, 255 * circle.brightness, 255 * circle.brightness, 255)
+    pygame.draw.circle(max_brightness_mask, brightness_color, mask_pos, circle.radius)
+    surface.blit(max_brightness_mask, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+
+
+def subtract_circle(circle1, circle2, surface):
+    """Subtract circle2's overlapping region from circle1's brightness."""
+    mask1 = pygame.mask.from_surface(circle1.get_surface(surface.get_size()))
+    mask2 = pygame.mask.from_surface(circle2.get_surface(surface.get_size()))
+    
+    # Get the intersecting area
+    intersection_mask = mask1.overlap_mask(mask2, (0, 0))
+    
+    # Subtract the intersection from circle1
+    inverse_intersection = pygame.mask.Mask(mask1.get_size())
+    inverse_intersection.invert()
+    clipped_mask = mask1.overlap_mask(inverse_intersection, (0, 0))
+
+    return clipped_mask
+
+def mask_to_surface(mask, color, size):
+    """Convert a mask to a surface with the given color and size."""
+    mask_surface = pygame.Surface(size, pygame.SRCALPHA)
+    mask_surface.fill((0, 0, 0, 0))  # Fill with transparent
+    
+    # Get the mask's pixels and draw them on the surface with the desired color
+    for x in range(size[0]):
+        for y in range(size[1]):
+            if mask.get_at((x, y)):
+                mask_surface.set_at((x, y), color)
+    
+    return mask_surface
+
+#####
 
 
 ### Layouts will be instanciated with a path to its triggers fill
@@ -455,11 +517,27 @@ class LayoutManager:
         # Dynamic handling based on type
         object_type = object_info.get("type",'')
         #print(f"object info:{object_info}")
+        
+        
+        
+        # TODO: SOLID principles issue, i do not want to adapt instantiate object when i create a new object,
+        #       solution is to have if object_type is Animated Sprite, then it should instantiate_animatedsprite
+        #       could just pass type to this and dynamically instantiate it .
+        
+        
         if object_type == "tree": 
             
             sprite_animation_config = object_info.get("sprite_animation_config")
             #print(f"ATTEMPTING TO CREATE TREE    config:{sprite_animation_config}")
             self.instantiate_tree(image_x_pos, image_y_pos, sprite_animation_config)
+            
+        elif object_type == "torch": 
+            
+            sprite_animation_config = object_info.get("sprite_animation_config")
+            #print(f"ATTEMPTING TO CREATE TREE    config:{sprite_animation_config}")
+            self.instantiate_torch(image_x_pos, image_y_pos, sprite_animation_config)
+            
+            
         else:
             Tile((image_x_pos, image_y_pos), [self.visible_sprites], "object", image)
     
@@ -476,6 +554,12 @@ class LayoutManager:
         
         Tree((x_pos, y_pos), [self.visible_sprites, self.obstacle_sprites], sprite_animation_config)
         
+    
+    def instantiate_torch(self, x_pos, y_pos, sprite_animation_config):
+        
+        Torch((x_pos, y_pos), [self.visible_sprites, self.obstacle_sprites], sprite_animation_config)
+       
+    
     
     def handle_overhead_area(self,
                              x_pos,
@@ -1032,7 +1116,7 @@ class Level4:
             #         if sprite.type == 'player':
             #             sprite.update()
             #print("pre")
-            self.layout_manager.obstacle_quad_tree.print_all()
+            #self.layout_manager.obstacle_quad_tree.print_all()
             #print(f"Player position as in start map func : {player_position}")
             
             
@@ -1057,7 +1141,7 @@ class Level4:
                 self.layout_manager.daytime_brightness_overlay.set_display_surface(self.display_surface) # TODO: done separately in both restart and not restart....terrible
         
            # print("post")
-            self.layout_manager.obstacle_quad_tree.print_all()
+            #self.layout_manager.obstacle_quad_tree.print_all()
 
     #def initialize_map_items(self, layout_path):
     #    initial_items_path = os.path.join(layout_path, 'initial_map_items.json')
@@ -1330,8 +1414,16 @@ class Level4:
         
         # TODO : implement quadtree ? its not particularly heavy part of the code...
         #      : implement mask collision
+        print("attack_sprites")
+        print(self.attack_sprites)
         if self.attack_sprites:
+
+            
             for attack_sprite in self.attack_sprites:
+                print("attack sprite position")
+                print( attack_sprite.rect.left )
+                print(  attack_sprite.rect.width)
+                print(  attack_sprite.rect.height)
                 collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
                 if collision_sprites:
                     for target_sprite in collision_sprites:
@@ -1353,6 +1445,90 @@ class Level4:
                         # TODO : define particle effect with damage amount, 
                         # also get target resistance etc.
                         self.damage_player(amount = 10, attack_type = None)
+
+
+
+
+### Single function to do all damage evaluation ( Not currently being used )
+    
+    def evaluate_damage(self):
+        for team in self.teams:
+            self.evaluate_team_damage(team)
+
+    def evaluate_team_damage(team):
+        
+        
+        
+        """
+        So i need to change the format of sprite groups
+        
+        a dictionary that keeps all the sprites, in teams
+        
+        Some attacks need to be able to hurt everybody (currently all attack sprites can hurt anyone)
+        
+        The Player needs to be in his own team, summons will then go in this team too.
+        
+        
+        WL:
+        In the combat streategy, the melee attack just damages directly, i actually need to create the attack
+        sprite
+        
+        For player melee, i think an attack sprite is created.....for player, it creates an attack sprite, right?
+        
+        
+        im not sure what is happening, i import Weapon and then create_attack adds an attack to attaack
+        sprites, when there is no weapon, im not sure what happens. 
+        
+        okokok so the Weapon is actually a sprite and it is created as an attack sprite,
+        in terms of not having a weapon, I'm not sure how it works.'
+        
+        ok, even without weapon, an attack sprite is created
+        
+        WLL: will do some tests on the size of the attack sprite that is created,
+             i just want to understand how the non weapon attack sprite is created
+             
+             for weapons, do they need to collide with the weapon or anything on the player
+             for non weapon, same.
+             
+             ok for weapon, it works quite well, for non weapon, its just a collision with some area in the
+             direction that you are clicking , which is wierd, it should be a mask collision with the
+             players weapon.
+        
+            It seems there are no mask collisions anyway, just for bumping and that.
+            
+            Yea, no, its just the entire square that it can collide with.in terms of being hit myself, 
+            i dont think thats true though. Yea, its the same for me, no mask collision
+            
+            WLL: 
+                1.do the mask collision first 
+                WLL
+                Its the weapon that is the sprite, the collision happens: player_attack_logic
+                
+                2.check how no weapon attack sprite is created ( i think its just in weapon )
+                3. Test the general get damage function for enemy melee ( remove direct damage from
+                                                                          combat strat, make an attack sprite)
+        
+        
+        """
+        
+        
+        # Damage from enemy teams
+        enemy_teams = team.enemy_teams
+        
+        for enemy_team in enemy_teams:
+            for attack_sprite in self.attack_sprites[team]:
+                collision_sprites = pygame.sprite.spritecollide( attack_sprite, self.sprites[team], False)
+                for target_sprite in collision_sprites:
+                    attack_type = 'physical' if attack_sprite.sprite_type == 'weapon' else 'magic'
+                    target_sprite.get_damage( attack_sprite, attack_type )
+            
+        # Possible neutral/friendly damage
+
+        for attack_sprite in self.attack_sprites["damage_all"]:
+            collision_sprites = pygame.sprite.spritecollide( attack_sprite, self.sprites[team], False)
+            for target_sprite in collision_sprites:
+                attack_type = 'physical' if attack_sprite.sprite_type == 'weapon' else 'magic'
+                target_sprite.get_damage( attack_sprite, attack_type )
 
 
   
@@ -1511,36 +1687,347 @@ class Level4:
                 
                 wind_force = self.weather.calculate_wind_force()
                 
+                # TODO: Should be placed in the Player, not level.
+                #### Player brightness circles / vision at night
+                   
+                                
+                # TODO: atleast refactor this, it seems that it needs OFFSET from camera group so level is not a terrible place for it
+                #       ideally find a way to have it in torch and player as opposed to here.
+                # Define brightness settings for Torch 
+                # torch_brightness_radius = 220
+                # num_circles = 6  
+                # #torch_brightness_factor = 0
+                
+                # # Determine brightness factor based on weather conditions
+                # if (self.weather.current_time > 18 and self.weather.current_time <= 20) or (self.weather.current_time <= 10 and self.weather.current_time > 9):
+                #     torch_brightness_factor = 0.008
+                # elif (self.weather.current_time > 20 and self.weather.current_time <= 22) or (self.weather.current_time <= 9 and self.weather.current_time > 7):
+                #     torch_brightness_factor = 0.009
+                # elif self.weather.current_time > 22 or self.weather.current_time <= 7:
+                #     torch_brightness_factor = 0.012
+                # else:
+                #     torch_brightness_factor = 0.007
+                
+                # # Create a surface for the brightness effect
+                # # brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+            
+            
+                
+                            
+                #             # Common brightness settings
+                # self.brightness_radius = 220
+                # num_circles = 6  # Adjust as needed
+                
+                # # Determine brightness factor based on weather conditions
+                # if (self.weather.current_time > 18 and self.weather.current_time <= 20) or (self.weather.current_time <= 10 and self.weather.current_time > 9):
+                #     brightness_factor = 0.008
+                # elif (self.weather.current_time > 20 and self.weather.current_time <= 22) or (self.weather.current_time <= 9 and self.weather.current_time > 7):
+                #     brightness_factor = 0.009
+                # elif self.weather.current_time > 22 or self.weather.current_time <= 7:
+                #     brightness_factor = 0.012
+                # else:
+                #     brightness_factor = 0.007
+                
+                # # Create a single surface for the brightness effect
+                # brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                
+                # # Draw brightness for the player
+                # center_x = self.display_surface.get_width() // 2
+                # center_y = self.display_surface.get_height() // 2
+                
+                # for i in range(num_circles):
+                #     if i >= 5:
+                #         continue
+                #     radius = self.brightness_radius * (1 / ((i + 1) ** 0.70))
+                #     brightness_factor_temp = brightness_factor * (1.58 ** i)  # Incremental brightness based on circle index
+                
+                #     # Draw the circle for the player
+                #     pygame.draw.circle(brightness_surface,
+                #                         (255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp),
+                #                         (center_x, center_y), radius)
+                
+                # # Draw brightness for each torch in visible_sprites
+                # for sprite in self.layout_manager.visible_sprites.sprites():
+                #     if isinstance(sprite, Torch):  # Check if the sprite is a Torch
+                #         # Get the position of the torch relative to the camera
+                #         torch_center_x = sprite.rect.centerx - self.layout_manager.visible_sprites.offset.x
+                #         torch_center_y = sprite.rect.centery - self.layout_manager.visible_sprites.offset.y
                         
-                self.brightness_radius = 220
-                center_x = self.display_surface.get_width() // 2
-                center_y = self.display_surface.get_height() // 2
+                #         # Draw concentric circles for torch brightness
+                #         for i in range(num_circles):
+                #             if i >= 5:
+                #                 continue
+                #             radius = self.brightness_radius * (1 / ((i + 1) ** 0.70))
+                
+                #             brightness_factor_temp = brightness_factor * (1.58 ** i)  # Incremental brightness based on circle index
+                            
+                #             # Draw the circle for the torch
+                #             pygame.draw.circle(brightness_surface,
+                #                                 (255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp),
+                #                                 (torch_center_x, torch_center_y), radius)
+                
+                     
+                # self.brightness_radius = 220
+                # center_x = self.display_surface.get_width() // 2
+                # center_y = self.display_surface.get_height() // 2
+                # num_circles = 6  # Adjust as needed
+                # if (self.weather.current_time > 18 and self.weather.current_time <= 20)  or (self.weather.current_time <= 10 and self.weather.current_time > 9) :
+                #     brightness_factor = 0.008
+                # if (self.weather.current_time > 20 and self.weather.current_time <= 22)  or (self.weather.current_time <= 9 and self.weather.current_time > 7) :
+                #     brightness_factor = 0.009
+                # elif self.weather.current_time > 22 or self.weather.current_time <= 10 :
+                #     brightness_factor = 0.012
+                # else: brightness_factor = 0.007
+                
+                # # Create a surface for the brightness effect
+                # #brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                
+                # # Draw concentric circles with decreasing brightness
+                # for i in range(num_circles):
+                #     if i >= 5: continue
+                #     #radius = self.brightness_radius - ( self.brightness_radius / num_circles )*i  # Adjust the increment as needed
+                #     radius = self.brightness_radius * (1/((i+1)**0.70))
+                #     brightness = 255  # Adjust the decrement as needed (!not used....)
+                #     if i == 0 :brightness_factor_temp = brightness_factor
+                #     else: brightness_factor_temp = brightness_factor_temp*1.58
+                            
+                #     # Draw the circle with the calculated alpha value
+                #     pygame.draw.circle(brightness_surface,
+                #                         (255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp), (center_x, center_y), radius)
+                
+                #     # Blit the brightness surface onto the display surface with additive blending
+                #     self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+                
+                
+                
+                # # Blit the brightness surface onto the display surface with additive blending
+                # self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+    
+                                
+                                
+                # # Player brightness settings
+                # self.brightness_radius = 220
+                # num_circles = 6  # Adjust as needed
+                
+                # # Determine brightness factor based on weather conditions
+                # if (self.weather.current_time > 18 and self.weather.current_time <= 20) or (self.weather.current_time <= 10 and self.weather.current_time > 9):
+                #     brightness_factor = 0.008
+                # elif (self.weather.current_time > 20 and self.weather.current_time <= 22) or (self.weather.current_time <= 9 and self.weather.current_time > 7):
+                #     brightness_factor = 0.009
+                # elif self.weather.current_time > 22 or self.weather.current_time <= 7:
+                #     brightness_factor = 0.012
+                # else:
+                #     brightness_factor = 0.007
+                
+                # # Create a single surface for the brightness effect
+                # brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                # brightness_surface.fill((0, 0, 0, 0))  # Fill with transparent
+                
+                # # Draw brightness for the player
+                # center_x = self.display_surface.get_width() // 2
+                # center_y = self.display_surface.get_height() // 2
+                
+                # # Create a temporary surface to calculate max brightness
+                # max_brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                # max_brightness_surface.fill((0, 0, 0, 0))  # Start with transparent
+                
+           
+                
+                # # Overlay torch brightness
+                # for sprite in self.layout_manager.visible_sprites.sprites():
+                #     if isinstance(sprite, Torch):  # Check if the sprite is a Torch
+                #         # Get the position of the torch relative to the visible_sprites
+                #         torch_center_x = sprite.rect.centerx - self.layout_manager.visible_sprites.offset.x
+                #         torch_center_y = sprite.rect.centery - self.layout_manager.visible_sprites.offset.y
+                        
+                #         # Draw concentric circles for torch brightness
+                #         for i in range(num_circles):
+                #             if i >= 5:
+                #                 continue
+                #             radius = self.brightness_radius * (1 / ((i + 1) ** 0.70))
+                
+                #             brightness_factor_temp = brightness_factor * (1.58 ** i)  # Incremental brightness based on circle index
+                            
+                #             # Draw the circle for the torch
+                #             pygame.draw.circle(max_brightness_surface,
+                #                                 (255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp),
+                #                                 (torch_center_x, torch_center_y), radius)
+                
+                # # Draw brightness for the player
+                # for i in range(num_circles):
+                #     if i >= 5:
+                #         continue
+                #     radius = self.brightness_radius * (1 / ((i + 1) ** 0.70))
+                #     brightness_factor_temp = brightness_factor * (1.58 ** i)  # Incremental brightness based on circle index
+                
+                #     # Draw the circle for the player
+                #     pygame.draw.circle(max_brightness_surface,
+                #                         (255 * brightness_factor_temp, 255enemy * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp),
+                #                         (center_x, center_y), radius)
+                
+                
+                # # Now we need to combine the brightness effects
+                # # Blit the max brightness surface onto the display surface with additive blending
+                # self.display_surface.blit(max_brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+                     
+                               
+                                # Player brightness settings
+                self.brightness_radius = 240
                 num_circles = 6  # Adjust as needed
-                if (self.weather.current_time > 18 and self.weather.current_time <= 20)  or (self.weather.current_time <= 10 and self.weather.current_time > 9) :
+                
+                # Determine brightness factor based on weather conditions
+                if (self.weather.current_time > 18 and self.weather.current_time <= 20) or (self.weather.current_time <= 10 and self.weather.current_time > 9):
                     brightness_factor = 0.008
-                if (self.weather.current_time > 20 and self.weather.current_time <= 22)  or (self.weather.current_time <= 9 and self.weather.current_time > 7) :
+                elif (self.weather.current_time > 20 and self.weather.current_time <= 22) or (self.weather.current_time <= 9 and self.weather.current_time > 7):
                     brightness_factor = 0.009
-                elif self.weather.current_time > 22 or self.weather.current_time <= 10 :
+                elif self.weather.current_time > 22 or self.weather.current_time <= 7:
                     brightness_factor = 0.012
-                else: brightness_factor = 0.007
+                else:
+                    brightness_factor = 0.007
                 
                 # Create a surface for the brightness effect
                 brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                brightness_surface.fill((0, 0, 0, 0))  # Fill with transparent
                 
-                # Draw concentric circles with decreasing brightness
+                # Player position
+                center_x = self.display_surface.get_width() // 2
+                center_y = self.display_surface.get_height() // 2
+                
+                # Helper function to calculate distance between two points
+                def calculate_distance(x1, y1, x2, y2):
+                    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+                
+                # Draw brightness for player and torches on a per-circle basis
                 for i in range(num_circles):
-                    if i >= 5: continue
-                    #radius = self.brightness_radius - ( self.brightness_radius / num_circles )*i  # Adjust the increment as needed
-                    radius = self.brightness_radius * (1/((i+1)**0.70))
-                    brightness = 255  # Adjust the decrement as needed
-                    if i == 0 :brightness_factor_temp = brightness_factor
-                    else: brightness_factor_temp = brightness_factor_temp*1.58
-                            
-                    # Draw the circle with the calculated alpha value
-                    pygame.draw.circle(brightness_surface, (255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp, 255 * brightness_factor_temp), (center_x, center_y), radius)
+                    radius = self.brightness_radius * (1 / ((i + 1) ** 0.70))
+                    player_brightness = brightness_factor * (1.58 ** i)  # Player brightness for this circle
                 
-                    # Blit the brightness surface onto the display surface with additive blending
-                    self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+                    # Draw the player circle
+                    pygame.draw.circle(brightness_surface,
+                                       (255 * player_brightness, 255 * player_brightness, 255 * player_brightness, 255),
+                                       (center_x, center_y), radius)
+                
+                    # Handle torch circles
+                    for sprite in self.layout_manager.visible_sprites.sprites():
+                        if isinstance(sprite, Torch):
+                            torch_center_x = sprite.rect.centerx - self.layout_manager.visible_sprites.offset.x
+                            torch_center_y = sprite.rect.centery - self.layout_manager.visible_sprites.offset.y
+                
+                            # Calculate torch brightness for this circle
+                            torch_brightness = brightness_factor * (1.58 ** i)
+                
+                            # Check if the torch circle overlaps with the player's circle
+                            distance_to_player = calculate_distance(torch_center_x, torch_center_y, center_x, center_y)
+                
+                            if distance_to_player < (radius):  # Overlap detected
+                                # Compare the brightness of the torch and the player for this circle
+                                if torch_brightness > player_brightness:
+                                    # Torch is brighter, draw the torch circle
+                                    pygame.draw.circle(brightness_surface,
+                                                       (255 * torch_brightness, 255 * torch_brightness, 255 * torch_brightness, 255),
+                                                       (torch_center_x, torch_center_y), radius)
+                                else:
+                                    # Player is brighter, skip drawing the torch circle in this region
+                                    continue
+                            else:
+                                # No overlap, draw the torch circle normally
+                                pygame.draw.circle(brightness_surface,
+                                                   (255 * torch_brightness, 255 * torch_brightness, 255 * torch_brightness, 255),
+                                                   (torch_center_x, torch_center_y), radius)
+                
+                # Now we need to combine the brightness effects
+                self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+
+               
+                
+               
+                
+                # Step 1: Create brightness circles for player and torches
+                
+                # brightness_circles = []
+                
+                # # Example player brightness settings
+                # player_brightness_radius = 220
+                # num_circles = 6  # Adjust as needed
+                # brightness_factor = 0.008  # Placeholder factor, adjust based on weather
+                
+                # player_center = (self.display_surface.get_width() // 2, self.display_surface.get_height() // 2)
+                
+                # for i in range(num_circles):
+                #     radius = player_brightness_radius * (1 / ((i + 1) ** 0.70))
+                #     brightness_factor_temp = brightness_factor * (1.58 ** i)
+                #     brightness_circles.append(BrightnessCircle(player_center, radius, brightness_factor_temp))
+                
+                # # Add torches
+                # for sprite in self.layout_manager.visible_sprites.sprites():
+                #     if isinstance(sprite, Torch):
+                #         torch_center = (sprite.rect.centerx - self.layout_manager.visible_sprites.offset.x,
+                #                         sprite.rect.centery - self.layout_manager.visible_sprites.offset.y)
+                
+                #         for i in range(num_circles):
+                #             radius = player_brightness_radius * (1 / ((i + 1) ** 0.70))
+                #             brightness_factor_temp = brightness_factor * (1.58 ** i)
+                #             brightness_circles.append(BrightnessCircle(torch_center, radius, brightness_factor_temp))
+                
+                # # Step 2: Create a surface for brightness effects
+                # brightness_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                
+                # # Create a mask surface for max brightness in overlapping areas
+                # max_brightness_mask = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                
+                # # Step 3: Process circles and intersections
+                # for i, circle in enumerate(brightness_circles):
+                #     overlapping_circles = [other for other in brightness_circles if other != circle and circle.intersects(other)]
+                    
+                #     if not overlapping_circles:
+                #         # No overlap, draw circle normally
+                #         draw_circle_with_brightness(brightness_surface, circle)
+                #     else:
+                #         # Handle overlapping circles
+                #         for other in overlapping_circles:
+                #             # Subtract the overlapping area from `circle`
+                #             clipped_mask = subtract_circle(circle, other, brightness_surface)
+                            
+                #             # Create a new surface for the non-overlapping area of circle1
+                #             non_overlapping_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+                            
+                #             # Draw the clipped part (non-overlapping area)
+                #             clipped_brightness_color = (255 * circle.brightness, 255 * circle.brightness, 255 * circle.brightness, 255)
+                #             clipped_surface = mask_to_surface(clipped_mask, clipped_brightness_color, self.display_surface.get_size())
+                #             non_overlapping_surface.blit(clipped_surface, (0, 0))
+                
+                #             # Draw the maximum brightness in the intersecting area
+                #             max_brightness = max(circle.brightness, other.brightness)
+                #             draw_circle_with_max_brightness(brightness_surface, circle, max_brightness_mask, circle.center)
+                
+                # # Step 4: Blit the brightness surface onto the display
+                # self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+            
+                
+      
+                # # Draw brightness for each torch in visible_sprites
+                # for sprite in self.layout_manager.visible_sprites.sprites():
+                #     if isinstance(sprite, Torch):  # Check if the sprite is a Torch
+                #         # Get the position of the torch relative to the camera
+                #         torch_center_x = sprite.rect.centerx - self.layout_manager.visible_sprites.offset.x
+                #         torch_center_y = sprite.rect.centery - self.layout_manager.visible_sprites.offset.y
+                        
+                #         # Draw concentric circles for torch brightness
+                #         for i in range(num_circles):
+                #             if i >= 5:
+                #                 continue
+                #             radius = torch_brightness_radius * (1 / ((i + 1) ** 0.70))
+
+                #             if i == 0 :torch_brightness_factor_temp = torch_brightness_factor
+                #             else: torch_brightness_factor_temp = torch_brightness_factor_temp*1.58
+                            
+                #             # Draw the circle for the torch
+                #             pygame.draw.circle(brightness_surface,
+                #                                (255 * torch_brightness_factor_temp, 255 * torch_brightness_factor_temp, 255 * torch_brightness_factor_temp, 255 * torch_brightness_factor_temp),
+                #                                (torch_center_x, torch_center_y), radius)
+                
+                #         # Blit the brightness surface onto the display surface with additive blending
+                #         self.display_surface.blit(brightness_surface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
                 
                 
             # Iterate over each grass tile and apply the wind force
@@ -1563,7 +2050,7 @@ class Level4:
                 self.layout_manager.visible_sprites.update_parallel( obstruction_quad_tree = self.layout_manager.obstacle_quad_tree,
                                                                      entity_quad_tree = self.layout_manager.entity_quad_tree,
                                                                      dt=dt,
-                                                                     weather = None,
+                                                                     weather = self.weather,
                                                                      wind_force = None )
                 
                 self.layout_manager.visible_sprites.custom_draw(self.player,dt, 0, 0.5) # default weather intensity and light level (should be atleast an attribute of the layout manager, really contained in the weather manager.)
@@ -1705,11 +2192,14 @@ class YSortCameraGroup(pygame.sprite.Group):
         futures = []
 
         for batch in sprite_batches:
-            future = self.executor.submit(self.update_for_parallel,obstruction_quad_tree,
+            future = self.executor.submit(self.update_for_parallel,
+                                          obstruction_quad_tree,
                                           entity_quad_tree,
                                           batch,
                                           dt,
-                                          self.lock)
+                                          self.lock,
+                                          weather,  # Pass down the weather information
+                                          wind_force,)
             futures.append(future)
 
         updated_sprites = []
@@ -1858,15 +2348,18 @@ class YSortCameraGroup(pygame.sprite.Group):
         
         for sprite in self.sprites():
             if isinstance(sprite, AnimatedEnvironmentSprite):
-                sprite.update(weather)
+                sprite.update(weather, self.display_surface)
             else:
                 sprite.update(dt)
     #@profile
     def update_for_parallel(self,obstacle_quad_tree, entity_quad_tree, batch, dt=None,lock=None, weather=None, wind_force=(0, 0) , *args, **kwargs):
         updated_sprites = []
         for sprite in batch:
-            if isinstance(sprite, AnimatedEnvironmentSprite):
-                sprite.update(weather)
+            if isinstance(sprite, AnimatedEnvironmentSprite):# at some point i was passing display to torch, kept this if incase for now.
+                if isinstance(sprite,Torch):
+                    sprite.update(weather)
+                else:
+                    sprite.update(weather)
             elif isinstance(sprite, Entity):
                 sprite.update(dt=dt,
                               QuadTree= obstacle_quad_tree,

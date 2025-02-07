@@ -5,6 +5,6 @@
   "spawn_type":"random_weights",
   "frequency": 10,
   "spawn_number":2,
-  "spawn_limit": 200,
+  "spawn_limit": 100,
   "next_spawn_time":10
 }

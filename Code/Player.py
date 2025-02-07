@@ -132,7 +132,38 @@ class BasePlayer(Entity):
 
         self.scale_animation()
         
+        
+    
+
+    def get_damage(self, amount, attack_type=None):
+        
+        #print(f"made it to damage player , vulerable: {self.player.vulnerable}")
+        #print(amount)
+        
+        if self.vulnerable:
+            self.health -= amount
+            self.vulnerable = False
+            self.hurt_time = pygame.time.get_ticks()
+            
+            if attack_type:
+                if attack_type != 'melee': ## TODO : a at the moment this is recieving attack type to do attack particles, 
+                                                    # we do not have any attack particles for this so screw it.
+                                                    
+                    self.animation_player.create_particles(attack_type, self.player.rect.center, [self.layout_manager.visible_sprites])
+
          
+
+    # def get_damage(self, player, attack_type):
+    #     if self.vulnerable:
+    #         self.hit_sound.play()
+    #         self.direction = self.get_player_distance_direction(player)[1]
+    #         if attack_type == "weapon":
+    #             self.health -= player.get_full_weapon_damage()
+    #         else:
+    #             self.health -= player.get_full_magic_damage()
+    #         self.hit_time = pygame.time.get_ticks()
+            
+
     def scale_animation(self):
         if hasattr(self, "TILESIZE"):
             for state, frames in self.animations.items():

@@ -1,10 +1,9 @@
 { 
   "enemy_spawn_weights":{
-      "demon_dog":10,
       "ice_ghost":10
       },
   "spawn_type":"random_weights",
   "frequency": 10,
-  "spawn_limit": 500,
-  "spawn_number":5
+  "spawn_limit": 60,
+  "spawn_number":20
 }
